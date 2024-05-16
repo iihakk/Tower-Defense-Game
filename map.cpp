@@ -29,7 +29,7 @@ void Map::startScene(){
     createPath(level);
 
     //Create a background Image
-    QPixmap backgroundImage(":/OtherImages/map.png");
+    QPixmap backgroundImage(":/OtherImages/Dark_Stone.jpg");
     backgroundImage.scaled(this->width, this->height, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     this->setBackgroundBrush(backgroundImage);
 
@@ -84,7 +84,7 @@ void Map::createTiles(){
     QGraphicsRectItem* rectItem; //rect item to initialize the tiles
 
     QBrush myBrush(Qt::transparent); //Set all tiles to be transparent
-    QBrush pathBrush(QPixmap(":/OtherImages/Sand.png").scaled(60,100)); //Set only the path tiles to have a sand background
+    QBrush pathBrush(QPixmap(":/OtherImages/Lava.jpg").scaled(60,100)); //Set only the path tiles to have a sand background
 
     //Create 100x100 tiles
     for(int i = 0; i < width; i+=100){
