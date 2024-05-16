@@ -29,7 +29,7 @@ Shop::Shop(QWidget *parent, Map* originalmap)
     ui->tesla->setPixmap(teslaT.scaled(w,h,Qt::KeepAspectRatio));
     ui->Xbow->setPixmap(XbowT.scaled(w,h,Qt::KeepAspectRatio));
 
-    ui->coinbalance->setReadOnly(true);
+    ui->insufficientbalance->setVisible(false);
 
     QFont font("Arial", 12);
 
@@ -41,6 +41,7 @@ Shop::Shop(QWidget *parent, Map* originalmap)
 Shop::~Shop()
 {
     delete ui;
+    delete map;
 
 }
 
@@ -52,24 +53,48 @@ void Shop::on_back_clicked()
 
 void Shop::on_cannonbuy_clicked()
 {
-    map->Coins -= 500;
+    if (map->Coins < 500){
+        ui->insufficientbalance->setVisible(true);
+    }
+    else {
+        hide();
+        emit deploycannon();
+    }
+
 }
 
 
 void Shop::on_infernobuy_clicked()
 {
-    map->Coins -= 750;
+    if (map->Coins < 750){
+        ui->insufficientbalance->setVisible(true);
+    }
+    else {
+        hide();
+        emit deployinferno();
+    }
 }
 
 
 void Shop::on_xbowbuy_clicked()
 {
-    map->Coins -= 1000;
+    if (map->Coins < 1000){
+        ui->insufficientbalance->setVisible(true);
+    }
+    else {
+        hide();
+        emit deployxbow();
+    }
 }
 
 
 void Shop::on_teslabuy_clicked()
 {
-    map->Coins -= 1500;
+    if (map->Coins < 1500){
+        ui->insufficientbalance->setVisible(true);
+    }
+    else {
+        hide();
+        emit deploytesla();
+    }
 }
-

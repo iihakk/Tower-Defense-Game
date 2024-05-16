@@ -22,6 +22,7 @@ bool CannonTower::upgrade(int& playerCurrency) {
         playerCurrency -= UpgradeCost;
         UpgradeCost += 50;
         UpgradeLevel++;
+        setLevelImage();
         return true;
     }
     return false;

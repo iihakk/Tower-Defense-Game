@@ -22,6 +22,7 @@ bool XbowTower::upgrade(int& playerCurrency) {
         playerCurrency -= UpgradeCost;
         UpgradeCost += 100;
         UpgradeLevel++;
+        setLevelImage();
         return true;
     }
     return false;

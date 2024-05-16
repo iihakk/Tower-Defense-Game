@@ -17,6 +17,7 @@ private:
     int level;
 
     QPushButton *shopbutton;
+    QPushButton *upgradebutton;
 
     QLabel* lblHealth;
     QLabel* lblLevel;
@@ -36,6 +37,7 @@ public:
     void setHealthLabelText(int num);
     void setLevelLabelText(int num);
     void setCoinsLabelText(int num);
+    void showShop();
 
     int Coins;
 
@@ -46,6 +48,13 @@ public:
     std::vector<QPoint*> path;
     std::vector<QPoint*> path2;
     std::vector<QGraphicsRectItem*> tiles;
+
+signals:
+    void deploythecannon();
+    void deploythetesla();
+    void deploythexbow();
+    void deploytheinferno();
+    void upgradetower();
 };
 
 #endif // MAP_H

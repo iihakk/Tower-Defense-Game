@@ -12,7 +12,7 @@
 Map::Map(int level) {
     // initialize health, score and level variables with correct values
     this->level = level;
-    Coins = 1000;
+    Coins = 5000;
     health = 100;
     QGraphicsScene();
     startScene();
@@ -43,15 +43,24 @@ void Map::startScene(){
 
     QFont font("Arial", 20);
 
-    QObject ::connect(shopbutton, &QPushButton::clicked, [=](){
-        Shop *shop = new Shop(NULL, this);
-        shop->show();
-    });
+    connect(shopbutton, &QPushButton::clicked, this, &Map ::showShop);
 
     shoppushbutton->setFont(font);
 
     // place button in correct position
     shoppushbutton->setGeometry(QRectF(1200,100,200,100));
+
+    // initialize upgrade button
+    upgradebutton = new QPushButton("Upgrade");
+
+    // add it to the scene
+    QGraphicsProxyWidget *upgrade = this->addWidget(upgradebutton);
+
+    connect(upgradebutton, &QPushButton::clicked, this, &Map :: upgradetower);
+
+    upgrade->setFont(font);
+
+    upgrade->setGeometry(QRectF(1200,200,200,100));
 
     //make labels for health, coins and Level
     lblHealth = new QLabel();
@@ -90,6 +99,7 @@ void Map::createTiles(){
     for(int i = 0; i < width; i+=100){
         for(int j = 0; j < height; j+=100){
 
+            if (!((i >= 1200 && i <= 1300) && (j >= 100 && j <= 200))) {
             rectItem = new QGraphicsRectItem(0,0,100,100); //create a new tile
 
             //fix its position
@@ -126,6 +136,7 @@ void Map::createTiles(){
                     rectItem->setBrush(pathBrush);
                     break;
                 }
+            }
             }
             }
         }
@@ -406,3 +417,13 @@ int Map::getcoinbalance()
     return Coins;
 }
 
+void Map::showShop()
+{
+    Shop *shop = new Shop(NULL,this);
+    shop->show();
+    connect(shop, &Shop::deploycannon, this, &Map :: deploythecannon);
+    connect(shop, &Shop::deploytesla, this, &Map :: deploythetesla);
+    connect(shop, &Shop::deployinferno, this, &Map :: deploytheinferno);
+    connect(shop, &Shop::deployxbow, this, &Map :: deploythexbow);
+
+}

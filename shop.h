@@ -16,6 +16,13 @@ public:
     explicit Shop(QWidget *parent = nullptr, Map* map = NULL);
     ~Shop();
 
+signals:
+    void deployxbow();
+    void deploycannon();
+    void deploytesla();
+    void deployinferno();
+
+
 private slots:
     void on_back_clicked();
 

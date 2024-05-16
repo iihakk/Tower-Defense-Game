@@ -150,17 +150,30 @@
     <string>Back to game</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="coinbalance">
+  <widget class="QLabel" name="coinbalance">
    <property name="geometry">
     <rect>
-     <x>220</x>
+     <x>180</x>
      <y>20</y>
-     <width>161</width>
-     <height>51</height>
+     <width>241</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="text">
-    <string>Coin Balance: </string>
+    <string>Coin Balance</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="insufficientbalance">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>20</y>
+     <width>241</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:22pt; color:#aa0000;&quot;&gt;Not enough coins&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
  </widget>

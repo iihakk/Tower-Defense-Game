@@ -11,23 +11,33 @@ GameController::GameController(Map* map)
     waveInterval(5000),
     waveDuration(10000),
     playerHealth(100), // Initialize playerHealth with an initial value
-    coinbalance(1000) //initialize coin balance
+    coinbalance(5000) //initialize coin balance
 {
     this->map = map;
+
     BalloonSpawn = new QSoundEffect(this);
     BalloonSpawn->setSource(QUrl("qrc:/Effects/BalloonSpawn.wav"));
-    BalloonDie = new QSoundEffect(this);
+
+    BalloonDie = new QSoundEffect(this);   
     BalloonDie->setSource(QUrl("qrc:/Effects/BalloonDie.wav"));
     waveTimer = new QTimer(this);
+
+    UpgradeSound = new QSoundEffect(this);
+    UpgradeSound->setSource(QUrl("qrc:/Effects/UpgradeSound.wav"));
+
     connect(waveTimer, &QTimer::timeout, this, &GameController::startWaves);
     waveTimer->start(waveInterval);
 
     connect(this, &GameController::playerLost, this, &GameController::handlePlayerLost);
 
-    //timer to check if a tower has been added (if a tile was clicked)
-    QTimer* checkIfAddTowerTimer = new QTimer(this);
-    connect(checkIfAddTowerTimer, &QTimer::timeout, this, &GameController::handleTileSelected);
-    checkIfAddTowerTimer->start(10);
+    // catch signals if sent to place towers and call each ones function
+    connect(map, &Map :: deploythexbow, this, &GameController :: placexbow);
+    connect(map, &Map :: deploytheinferno, this, &GameController :: placeinferno);
+    connect(map, &Map :: deploythecannon, this, &GameController :: placecannon);
+    connect(map, &Map :: deploythetesla, this, &GameController :: placetesla);
+
+
+    connect(map, &Map :: upgradetower, this, &GameController :: UpgradeTower);
 }
 
 //sets the number of waves
@@ -127,46 +137,102 @@ void GameController::handlePlayerLost(){
     // close the game
 }
 
-// void GameController::handleTileSelected(){
-//     for(QGraphicsRectItem* tile: map->tiles){
-//         if(tile->isSelected()){
-//             CannonTower* newCannon = new CannonTower(map, tile->x(),tile->y());
-//             towers.append(newCannon);
-//             tile->setFlag(QGraphicsItem::ItemIsSelectable, false);
-//         }
-//     }
-// }
+void GameController::placecannon(){
 
-
-// void GameController::handleTileSelected(){
-//     for(QGraphicsRectItem* tile: map->tiles){
-//         if(tile->isSelected()){
-//             InfernoTower* newInferno = new InfernoTower(map, tile->x(), tile->y());
-//             towers.append(newInferno);
-//             tile->setFlag(QGraphicsItem::ItemIsSelectable, false);
-//         }
-//     }
-// }
-
-void GameController::handleTileSelected(){
     for(QGraphicsRectItem* tile: map->tiles){
-        if(tile->isSelected()){
-            XbowTower* newXbow = new XbowTower(map, tile->x(), tile->y());
-            towers.append(newXbow);
-            tile->setFlag(QGraphicsItem::ItemIsSelectable, false);
+        if(tile->isSelected() && (towerbuilt(tile->x(),tile->y()) == false)){
+
+            // remove coins to buy the tower
+            map->Coins -=500;
+            coinbalance -= 500;
+            map->setCoinsLabelText(coinbalance);
+
+            CannonTower* newCannon = new CannonTower(map, tile->x(),tile->y());
+            towers.append(newCannon);
+            //tile->setFlag(QGraphicsItem::ItemIsSelectable, false);
         }
     }
 }
 
-// void GameController::handleTileSelected(){
-//     for(QGraphicsRectItem* tile: map->tiles){
-//         if(tile->isSelected()){
-//             TeslaTower* newTesla = new TeslaTower(map, tile->x(), tile->y());
-//             towers.append(newTesla);
-//             tile->setFlag(QGraphicsItem::ItemIsSelectable, false);
-//         }
-//     }
-// }
+void GameController::UpgradeTower()
+{
+    for(QGraphicsRectItem* tile: map->tiles){
+        if(tile->isSelected() && towerbuilt(tile->x(),tile->y())){
+
+            towers[selectedtower]->upgrade(coinbalance);
+            UpgradeSound->play();
+            map->setCoinsLabelText(coinbalance);
+
+        }
+    }
+}
+
+bool GameController::towerbuilt(int x, int y)
+{
+
+    QPointF point(x,y);
+
+    for (int i = 0; i <towers.size();i++){
+        if (towers[i]->pos() == point){
+
+            selectedtower = i;
+            return true;
+
+        }
+    }
+    return false;
+}
+
+
+void GameController::placeinferno(){
+
+    for(QGraphicsRectItem* tile: map->tiles){
+        if(tile->isSelected() && (towerbuilt(tile->x(),tile->y()) == false)){
+
+            // remove coins to buy the tower
+            map->Coins -=750;
+            coinbalance -= 750;
+            map->setCoinsLabelText(coinbalance);
+
+            InfernoTower* newInferno = new InfernoTower(map, tile->x(), tile->y());
+            towers.append(newInferno);
+        }
+    }
+}
+
+void GameController::placexbow(){
+
+
+    for(QGraphicsRectItem* tile: map->tiles){
+        if(tile->isSelected() && (towerbuilt(tile->x(),tile->y()) == false)){
+            // remove coins to buy the tower
+            map->Coins -=1000;
+            coinbalance -= 1000;
+            map->setCoinsLabelText(coinbalance);
+
+            XbowTower* newXbow = new XbowTower(map, tile->x(), tile->y());
+            towers.append(newXbow);
+        }
+    }
+}
+
+void GameController::placetesla(){
+
+
+    for(QGraphicsRectItem* tile: map->tiles){
+        if(tile->isSelected() && (towerbuilt(tile->x(),tile->y()) == false)){
+
+            //remove coins to buy the tower
+            map->Coins -=1500;
+            coinbalance -= 1500;
+            map->setCoinsLabelText(coinbalance);
+
+            TeslaTower* newTesla = new TeslaTower(map, tile->x(), tile->y());
+            towers.append(newTesla);
+
+        }
+    }
+}
 
 
 

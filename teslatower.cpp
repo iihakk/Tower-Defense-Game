@@ -22,6 +22,7 @@ bool TeslaTower::upgrade(int& playerCurrency) {
         playerCurrency -= UpgradeCost;
         UpgradeCost += 150;
         UpgradeLevel++;
+        setLevelImage();
         return true;
     }
     return false;

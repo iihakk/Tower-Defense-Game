@@ -42,13 +42,24 @@ private:
     int waveDuration;
     int playerHealth; // Declaration of playerHealth variable
     int coinbalance;
+    int selectedtower;
+
     QSoundEffect* BalloonSpawn;
     QSoundEffect* BalloonDie;
+    QSoundEffect* UpgradeSound;
+
     void spawnEnemy();
     void handleEnemyDestroyed(Enemy* destroyedEnemy);
     void handleEnemyDissapeared(Enemy* enemy);
     void handlePlayerLost();
-    void handleTileSelected();
+
+    void placexbow();
+    void placetesla();
+    void placeinferno();
+    void placecannon();
+
+    void UpgradeTower();
+    bool towerbuilt(int x,int y);
 
 };
 
