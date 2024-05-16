@@ -157,7 +157,7 @@ void GameController::placecannon(){
 void GameController::UpgradeTower()
 {
     for(QGraphicsRectItem* tile: map->tiles){
-        if(tile->isSelected() && towerbuilt(tile->x(),tile->y())){
+        if(tile->isSelected() && towerbuilt(tile->x(),tile->y()) && (towers[selectedtower]->getlevel() < 2)){
 
             towers[selectedtower]->upgrade(coinbalance);
             UpgradeSound->play();

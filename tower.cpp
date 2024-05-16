@@ -14,13 +14,6 @@ Tower::Tower(int dmg, int hlth, int cst, int rng, int fireR, Map* map)
     towerShootingTimer->start(1000);
 }
 
-// Tower::~Tower(){
-//     for(CannonBullet* bullet: bullets){
-//         delete bullet;
-//     }
-//     this->scene()->removeItem(this);
-// }
-
 Tower::~Tower(){
     for(Bullet* bullet: bullets){
         this->scene()->removeItem(this);
@@ -35,30 +28,13 @@ void Tower::increaseAttributes(int dmgIncrease, int rangeIncrease, int rateIncre
     UpgradeCost += costIncrease;
 }
 
-// void Tower::shoot(){
-//     closestEnemy = findClosestEnemyWithinRange(); //Find the closest enemy
-//     if(closestEnemy){
-//         QPointF position = this->pos();
-//         position.setX(this->x()+50);
-//         position.setY(this->y()+50);
-//         CannonBullet* bullet = new CannonBullet(map, position, Damage, closestEnemy); //create a new bullet with the specified map, position, damage, and enemy
-//         bullets.append(bullet); //append the bullet to the list of bullets shot by the tower
-//     }
-// }
-
-// void Tower::shoot(){
-//     closestEnemy = findClosestEnemyWithinRange(); //Find the closest enemy
-//     if(closestEnemy){
-//         QPointF position = this->pos();
-//         position.setX(this->x()+50);
-//         position.setY(this->y()+50);
-//         InfernoBullet* bullet = new InfernoBullet(map, position, Damage, closestEnemy); //create a new bullet with the specified map, position, damage, and enemy
-//         bullets.append(bullet); //append the bullet to the list of bullets shot by the tower
-//     }
-// }
-
 void Tower::stopShootingTimer(){
     towerShootingTimer->stop();
+}
+
+int Tower::getlevel()
+{
+    return UpgradeLevel;
 }
 
 //Change the closest enemy to the specified enemy

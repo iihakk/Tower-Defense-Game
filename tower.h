@@ -22,6 +22,7 @@ public:
     QList<Bullet*> bullets;
     QTimer* towerShootingTimer;
     void stopShootingTimer();
+    int getlevel();
 
 public slots:
     virtual void shoot() = 0;
@@ -34,7 +35,7 @@ protected:
     int FiringRate = 100; //firing rate is the number of ms between each bullet
     int UpgradeCost;
     int UpgradeLevel;
-    static const int MaxUpgradeLevel = 3;
+    static const int MaxUpgradeLevel = 2;
     Enemy* closestEnemy;
     QList<Enemy*> enemies;
 
