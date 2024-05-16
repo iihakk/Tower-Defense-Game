@@ -17,13 +17,19 @@ CannonTower::CannonTower(Map* map, int posX, int posY) : CannonTower(map){
 }
 
 bool CannonTower::upgrade(int& playerCurrency) {
-    if (UpgradeLevel < MaxUpgradeLevel && playerCurrency >= UpgradeCost) {
-        increaseAttributes(2, 5, 1, 50);
-        playerCurrency -= UpgradeCost;
-        UpgradeCost += 50;
-        UpgradeLevel++;
-        setLevelImage();
-        return true;
+    ConfirmUpgrade = upgrademsg();
+
+    if (ConfirmUpgrade == true){
+            if (playerCurrency >= UpgradeCost){
+                playerCurrency -= UpgradeCost;
+                increaseAttributes(2, 5, 1, 50);
+                UpgradeLevel++;
+                setLevelImage();
+                return true;
+            }
+            else{
+                insufficientbalance();
+            }
     }
     return false;
 }

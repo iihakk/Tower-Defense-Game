@@ -156,13 +156,17 @@ void GameController::placecannon(){
 
 void GameController::UpgradeTower()
 {
+
     for(QGraphicsRectItem* tile: map->tiles){
-        if(tile->isSelected() && towerbuilt(tile->x(),tile->y()) && (towers[selectedtower]->getlevel() < 2)){
+        if(tile->isSelected() && towerbuilt(tile->x(),tile->y())){
 
-            towers[selectedtower]->upgrade(coinbalance);
-            UpgradeSound->play();
-            map->setCoinsLabelText(coinbalance);
-
+            if (towers[selectedtower]->getlevel() == 2){
+                towers[selectedtower]->maximumtowerlevel();
+            }
+                else if (towers[selectedtower]->upgrade(coinbalance) == true){
+                    UpgradeSound->play();
+                    map->setCoinsLabelText(coinbalance);
+                }
         }
     }
 }

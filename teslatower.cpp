@@ -17,16 +17,24 @@ TeslaTower::TeslaTower(Map* map, int posX, int posY) : TeslaTower(map) {
 }
 
 bool TeslaTower::upgrade(int& playerCurrency) {
-    if (UpgradeLevel < MaxUpgradeLevel && playerCurrency >= UpgradeCost) {
-        increaseAttributes(8, 25, 4, 150);
-        playerCurrency -= UpgradeCost;
-        UpgradeCost += 150;
-        UpgradeLevel++;
-        setLevelImage();
-        return true;
-    }
+
+    ConfirmUpgrade = upgrademsg();
+
+    if (ConfirmUpgrade == true){
+            if (playerCurrency >= UpgradeCost){
+                playerCurrency -= UpgradeCost;
+                increaseAttributes(8, 25, 4, 150);
+                UpgradeLevel++;
+                setLevelImage();
+                return true;
+            }
+            else{
+                insufficientbalance();
+            }
+        }
     return false;
 }
+
 
 void TeslaTower::setLevelImage() {
     setPixmap(QPixmap(levelImages[UpgradeLevel]).scaled(100, 100));

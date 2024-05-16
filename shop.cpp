@@ -4,6 +4,7 @@
 #include <QFont>
 
 
+
 Shop::Shop(QWidget *parent, Map* originalmap)
     : QDialog(parent)
     , ui(new Ui::Shop),

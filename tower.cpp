@@ -1,6 +1,8 @@
 #include "tower.h"
 #include <QTimer>
 #include <iostream>
+#include <QMessageBox>
+#include <QString>
 
 // base tower instantiation with its properties and sets the QGraphicsItem as parent
 Tower::Tower(int dmg, int hlth, int cst, int rng, int fireR, Map* map)
@@ -12,6 +14,8 @@ Tower::Tower(int dmg, int hlth, int cst, int rng, int fireR, Map* map)
     towerShootingTimer = new QTimer();
     connect(towerShootingTimer, SIGNAL(timeout()), this, SLOT(shoot()));
     towerShootingTimer->start(1000);
+
+
 }
 
 Tower::~Tower(){
@@ -36,6 +40,38 @@ int Tower::getlevel()
 {
     return UpgradeLevel;
 }
+
+bool Tower::upgrademsg()
+{
+    QString message = "Are you sure you want to upgrade the tower? this will cost you " + QString::number(UpgradeCost) + " coins";
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(NULL, "Upgrade Tower",message,
+                                  QMessageBox::Yes | QMessageBox::No);
+
+    if (reply == QMessageBox::Yes){
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+void Tower::maximumtowerlevel()
+{
+    QMessageBox *maxTowerLevelBox = new QMessageBox();
+    maxTowerLevelBox->setWindowTitle("Maximum Tower Level");
+    maxTowerLevelBox->setText("You've reached the maximum level for this tower.");
+    maxTowerLevelBox->show();
+}
+
+void Tower::insufficientbalance()
+{
+    QMessageBox *insufficientCoinsBox = new QMessageBox();
+    insufficientCoinsBox->setWindowTitle("Insufficient Balance");
+    insufficientCoinsBox->setText("You don't have enough coins to upgrade this tower");
+    insufficientCoinsBox->show();
+}
+
 
 //Change the closest enemy to the specified enemy
 void Tower::setClosestEnemy(Enemy* enemy){

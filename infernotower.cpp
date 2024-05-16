@@ -17,16 +17,24 @@ InfernoTower::InfernoTower(Map* map, int posX, int posY) : InfernoTower(map) {
 }
 
 bool InfernoTower::upgrade(int& playerCurrency) {
-    if (UpgradeLevel < MaxUpgradeLevel && playerCurrency >= UpgradeCost) {
-        increaseAttributes(3, 10, 2, 75);
-        playerCurrency -= UpgradeCost;
-        UpgradeCost += 75;
-        UpgradeLevel++;
-        setLevelImage();
-        return true;
+    ConfirmUpgrade = upgrademsg();
+
+    if (ConfirmUpgrade == true){
+            if (playerCurrency >= UpgradeCost){
+                playerCurrency -= UpgradeCost;
+                increaseAttributes(3, 10, 2, 75);
+                UpgradeLevel++;
+                setLevelImage();
+                return true;
+            }
+            else{
+                insufficientbalance();
+            }
     }
     return false;
 }
+
+
 
 void InfernoTower::setLevelImage() {
     setPixmap(QPixmap(levelImages[UpgradeLevel]).scaled(100,100));

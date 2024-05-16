@@ -17,16 +17,27 @@ XbowTower::XbowTower(Map* map, int posX, int posY) : XbowTower(map) {
 }
 
 bool XbowTower::upgrade(int& playerCurrency) {
-    if (UpgradeLevel < MaxUpgradeLevel && playerCurrency >= UpgradeCost) {
-        increaseAttributes(5, 20, 3, 100);
-        playerCurrency -= UpgradeCost;
-        UpgradeCost += 100;
-        UpgradeLevel++;
-        setLevelImage();
-        return true;
+    ConfirmUpgrade = upgrademsg();
+
+    if (ConfirmUpgrade == true){
+        if (UpgradeLevel < MaxUpgradeLevel) {
+            if (playerCurrency >= UpgradeCost){
+                playerCurrency -= UpgradeCost;
+                increaseAttributes(5, 20, 3, 100);
+                UpgradeLevel++;
+                setLevelImage();
+                return true;
+            }
+            else{
+                insufficientbalance();
+            }
+        }
     }
     return false;
 }
+
+
+
 
 void XbowTower::setLevelImage() {
     setPixmap(QPixmap(levelImages[UpgradeLevel]).scaled(100, 100));

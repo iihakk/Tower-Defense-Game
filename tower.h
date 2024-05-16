@@ -8,6 +8,7 @@
 #include "enemy.h"
 #include "cannonbullet.h"
 #include "infernobullet.h"
+#include <QMessageBox>
 
 class Tower : public QObject, public QGraphicsPixmapItem {
     Q_OBJECT
@@ -23,6 +24,10 @@ public:
     QTimer* towerShootingTimer;
     void stopShootingTimer();
     int getlevel();
+    bool upgrademsg();
+    void maximumtowerlevel();
+    void insufficientbalance();
+
 
 public slots:
     virtual void shoot() = 0;
@@ -38,6 +43,8 @@ protected:
     static const int MaxUpgradeLevel = 2;
     Enemy* closestEnemy;
     QList<Enemy*> enemies;
+    bool ConfirmUpgrade;
+
 
     Map* map;
     std::vector<QString> levelImages;
