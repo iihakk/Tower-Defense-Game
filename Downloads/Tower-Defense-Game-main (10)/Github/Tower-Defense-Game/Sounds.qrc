@@ -1,9 +1,0 @@
-<RCC>
-    <qresource prefix="/Music">
-        <file>GameMusic.wav</file>
-    </qresource>
-    <qresource prefix="/Effects">
-        <file>BalloonDie.wav</file>
-        <file>BalloonSpawn.wav</file>
-    </qresource>
-</RCC>
