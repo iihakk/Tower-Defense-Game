@@ -2,13 +2,12 @@
 #define XBOWTOWER_H
 
 #include "tower.h"
-#include "xbowbullet.h" // Include the X-Bow specific bullet class
+#include "xbowbullet.h"
 
 class XbowTower : public Tower {
 public:
     XbowTower(Map* map);
     XbowTower(Map* map, int posX, int posY);
-
     bool upgrade(int& playerCurrency) override;
     void shoot() override;
 

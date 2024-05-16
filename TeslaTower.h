@@ -2,13 +2,12 @@
 #define TESLATOWER_H
 
 #include "tower.h"
-#include "teslabullet.h" // Include the Tesla-specific bullet class
+#include "teslabullet.h"
 
 class TeslaTower : public Tower {
 public:
     TeslaTower(Map* map);
     TeslaTower(Map* map, int posX, int posY);
-
     bool upgrade(int& playerCurrency) override;
     void shoot() override;
 

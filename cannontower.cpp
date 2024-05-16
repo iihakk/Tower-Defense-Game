@@ -1,7 +1,5 @@
 #include "cannontower.h"
 
-//const QString CANNON_TOWER_IMAGE_PATH = ":/images/cannon_tower.png";
-
 const std::vector<QString> CannonTower::levelImages = {
     ":/TowerImages/Cannon1.png",
     ":/TowerImages/Cannon2.png",

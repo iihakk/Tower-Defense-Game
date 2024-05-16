@@ -7,7 +7,7 @@ CannonBullet::CannonBullet(Map* map, QPointF& pos, double damage, Enemy* targetE
 }
 
 void CannonBullet::move() {
-    if (enemy == nullptr ||  (!enemy->isALive())) {
+    if (enemy == nullptr ||  (!enemy->isALive())){
         delete this;
         return;
     }
@@ -28,6 +28,12 @@ void CannonBullet::move() {
         } else if (enemyYPosition < bulletYPosition) {
             this->setY(bulletYPosition - 2);
         }
+    }
+    // Check for collision with the enemy
+    if (this->collidesWithItem(enemy)) {
+        this->scene()->removeItem(this);
+        enemy->takeDamage(damage); // Inflict damage to the enemy
+        delete this; // Destroy the bullet
     }
 }
 

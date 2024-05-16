@@ -41,4 +41,3 @@ void XbowTower::shoot() {
         bullets.append(bullet); // Append the bullet to the list of bullets shot by the tower
     }
 }
-

@@ -7,8 +7,7 @@ InfernoBullet::InfernoBullet(Map* map, QPointF& pos, double damage, Enemy* targe
 }
 
 void InfernoBullet::move() {
-    if (enemy == nullptr ||  (!enemy->isALive()))
-        {
+    if (enemy == nullptr ||  (!enemy->isALive())){
             delete this;
             return;
         }

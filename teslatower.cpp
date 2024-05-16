@@ -6,20 +6,21 @@ const std::vector<QString> TeslaTower::levelImages = {
     ":/TowerImages/Tesla3.png"
 };
 
-TeslaTower::TeslaTower(Map* map) : Tower(15, 180, 250, 400, 1, map) { // Adjust the attributes as necessary
+TeslaTower::TeslaTower(Map* map) : Tower(15, 180, 250, 400, 1, map) {
     setLevelImage();
 }
 
 TeslaTower::TeslaTower(Map* map, int posX, int posY) : TeslaTower(map) {
-    setX(posX);
-    setY(posY);
+    setLevelImage();
+    this->setX(posX);
+    this->setY(posY);
 }
 
 bool TeslaTower::upgrade(int& playerCurrency) {
     if (UpgradeLevel < MaxUpgradeLevel && playerCurrency >= UpgradeCost) {
-        increaseAttributes(8, 25, 4, 150); // Adjust the increase values as necessary
+        increaseAttributes(8, 25, 4, 150);
         playerCurrency -= UpgradeCost;
-        UpgradeCost += 150; // Adjust the cost increment as necessary
+        UpgradeCost += 150;
         UpgradeLevel++;
         return true;
     }
