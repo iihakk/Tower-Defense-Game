@@ -1,6 +1,5 @@
 #include "tower.h"
 #include <QTimer>
-#include <iostream>
 #include <QMessageBox>
 #include <QString>
 
@@ -14,14 +13,13 @@ Tower::Tower(int dmg, int hlth, int cst, int rng, int fireR, Map* map)
     towerShootingTimer = new QTimer();
     connect(towerShootingTimer, SIGNAL(timeout()), this, SLOT(shoot()));
     towerShootingTimer->start(1000);
-
-
 }
 
 Tower::~Tower(){
     for(Bullet* bullet: bullets){
         this->scene()->removeItem(bullet);
     }
+    this->scene()->removeItem(this);
 }
 
 // function to be used for upgrading
@@ -61,6 +59,7 @@ void Tower::maximumtowerlevel()
     QMessageBox *maxTowerLevelBox = new QMessageBox();
     maxTowerLevelBox->setWindowTitle("Maximum Tower Level");
     maxTowerLevelBox->setText("You've reached the maximum level for this tower.");
+    maxTowerLevelBox->setFont(QFont("Franklin Gothic Heavy"));
     maxTowerLevelBox->show();
 }
 

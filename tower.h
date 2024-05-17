@@ -15,14 +15,18 @@ class Tower : public QObject, public QGraphicsPixmapItem {
 public:
     Tower(int dmg, int hlth, int cst, int rng, int fireR, Map* map);
     ~Tower();
+
     virtual bool upgrade(int& playerCurrency) = 0;
     virtual void setLevelImage() = 0;
-    void setClosestEnemy(Enemy* enemy);
-    void setEnemies(QList<Enemy*>& enemies);
+
     Enemy* getClosestEnemy() const;
     QList<Bullet*> bullets;
     QTimer* towerShootingTimer;
+
+    void setClosestEnemy(Enemy* enemy);
+    void setEnemies(QList<Enemy*>& enemies);
     void stopShootingTimer();
+
     int getlevel();
     bool upgrademsg();
     void maximumtowerlevel();
