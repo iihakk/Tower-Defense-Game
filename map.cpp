@@ -29,7 +29,7 @@ void Map::startScene(){
     createPath(level);
 
     //Create a background Image
-    QPixmap backgroundImage(":/OtherImages/Dark_Stone.jpg");
+    QPixmap backgroundImage(":/OtherImages/dark-rock-wall-seamless-texture-free-105.jpg.png");
     backgroundImage.scaled(this->width, this->height, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
     this->setBackgroundBrush(backgroundImage);
 
