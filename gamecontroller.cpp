@@ -78,9 +78,9 @@ void GameController::spawnEnemy()
     connect(enemy, &Enemy::enemyDestroyed, this, &GameController::handleEnemyDestroyed);
     connect(enemy, &Enemy::enemyDissapeared, this, &GameController::handleEnemyDissapeared);
 
-    for(int i =0 ; i< towers.size(); i++){
-        towers[i]->setEnemies(enemies);
-    }
+    // for(int i =0 ; i< towers.size(); i++){
+    //     towers[i]->setEnemies(enemies);
+    // }
 }
 
 //if an enemy is destroyed, remove the enemy and all the bullets that headed towards the now dead enemy
@@ -93,9 +93,9 @@ void GameController::handleEnemyDestroyed(Enemy* destroyedEnemy) {
 
         enemies.removeOne(destroyedEnemy);
 
-        for(int i =0 ; i< towers.size(); i++){
-            towers[i]->setEnemies(enemies);
-        }
+        // for(int i =0 ; i< towers.size(); i++){
+        //     towers[i]->setEnemies(enemies);
+        // }
 
         for(int i = 0; i < towers.size(); i++){
             for(int j = 0; j < towers[i]->bullets.size(); j++){
@@ -115,10 +115,11 @@ void GameController::handleEnemyDestroyed(Enemy* destroyedEnemy) {
 
 //if an enemy dissapeared, remove the enemy and decrease the player health
 void GameController::handleEnemyDissapeared(Enemy* enemy){
+    enemy->setAlive(false);
     enemies.removeOne(enemy);
-    for(int i =0 ; i< towers.size(); i++){
-        towers[i]->setEnemies(enemies);
-    }
+    // for(int i =0 ; i< towers.size(); i++){
+    //     towers[i]->setEnemies(enemies);
+    // }
     playerHealth -= 10;
     map->setHealthLabelText(playerHealth);
     if(playerHealth <= 0){
@@ -149,6 +150,7 @@ void GameController::placecannon(){
 
             CannonTower* newCannon = new CannonTower(map, tile->x(),tile->y());
             towers.append(newCannon);
+            connect(newCannon, SIGNAL(shoot(Tower*)), this, SLOT(handleTowerShooting(Tower*)));
             //tile->setFlag(QGraphicsItem::ItemIsSelectable, false);
         }
     }
@@ -200,6 +202,7 @@ void GameController::placeinferno(){
 
             InfernoTower* newInferno = new InfernoTower(map, tile->x(), tile->y());
             towers.append(newInferno);
+            connect(newInferno, SIGNAL(shoot(Tower*)), this, SLOT(handleTowerShooting(Tower*)));
         }
     }
 }
@@ -216,6 +219,7 @@ void GameController::placexbow(){
 
             XbowTower* newXbow = new XbowTower(map, tile->x(), tile->y());
             towers.append(newXbow);
+            connect(newXbow, SIGNAL(shoot(Tower*)), this, SLOT(handleTowerShooting(Tower*)));
         }
     }
 }
@@ -233,12 +237,49 @@ void GameController::placetesla(){
 
             TeslaTower* newTesla = new TeslaTower(map, tile->x(), tile->y());
             towers.append(newTesla);
-
+            connect(newTesla, SIGNAL(shoot(Tower*)), this, SLOT(handleTowerShooting(Tower*)));
         }
     }
 }
 
+//Calculate the distance between two points
+double GameController::calculateDistance(const QPointF& from, const QPointF& to) {
+    return sqrt(pow(from.x() - to.x(), 2) + pow(from.y() - to.y(), 2));
+}
 
+//Find the closest enemy within range
+Enemy* GameController::findClosestEnemyWithinRange(Tower* tower){
 
+    //Set the closest enemy to be at infinite distance
+    double closestEnemyDistance = INT_MAX;
+    int indexClosestEnemy = -1;
+    double currentDistance = INT_MAX;
+    for(int i = 0; i < enemies.size();i++){
+        if(enemies[i]->scene() == map){
+            QPointF enemyPos = enemies[i]->pos();
+            currentDistance = calculateDistance(enemyPos, tower->pos());
+            if(currentDistance <= tower->getRange() && currentDistance < closestEnemyDistance){ //If the enemy is closer than the closest enemy and within range update the closest
+                closestEnemyDistance = currentDistance;
+                indexClosestEnemy = i;
+            }
+        }
+    }
+
+    if(indexClosestEnemy == -1){
+        return nullptr;
+    }
+
+    if(enemies[indexClosestEnemy]){
+        return enemies[indexClosestEnemy];
+    }
+
+    return nullptr;
+}
+
+void GameController::handleTowerShooting(Tower* tower){
+    Enemy* closestEnemy = findClosestEnemyWithinRange(tower);
+    if(closestEnemy)
+        tower->shoot(closestEnemy);
+}
 
 

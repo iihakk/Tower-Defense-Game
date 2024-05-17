@@ -12,7 +12,7 @@
 StartMenu::StartMenu(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::StartMenu)
-    , map(new Map(5)) // Instantiate Map object
+    , map(new Map(1)) // Instantiate Map object
     , view(NULL)
 {
     ui->setupUi(this);

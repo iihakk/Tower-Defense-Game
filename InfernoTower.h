@@ -10,6 +10,10 @@ public:
     InfernoTower(Map* myMap, int posX, int posY);
     bool upgrade(int& playerCurrency) override;
     void setLevelImage() override;
+    void shoot(Enemy* enemy) override;
+
+signals:
+    void shoot(Tower* tower);
 
 public slots:
     void handleDeleteBulletSignal(Bullet* bullet);

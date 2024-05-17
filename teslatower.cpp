@@ -23,7 +23,7 @@ bool TeslaTower::upgrade(int& playerCurrency) {
     if (ConfirmUpgrade == true){
             if (playerCurrency >= UpgradeCost){
                 playerCurrency -= UpgradeCost;
-                increaseAttributes(8, 25, 4, 150);
+                increaseAttributes(5, 0, 0, 150);
                 UpgradeLevel++;
                 setLevelImage();
                 return true;
@@ -41,13 +41,16 @@ void TeslaTower::setLevelImage() {
 }
 
 void TeslaTower::shoot() {
-    closestEnemy = findClosestEnemyWithinRange(); // Find the closest enemy
-    if (closestEnemy) {
+    emit Tower::shoot(this);
+}
+
+void TeslaTower::shoot(Enemy* enemy){
+    if(enemy){
         QPointF position = this->pos();
-        position.setX(this->x() + 50);
-        position.setY(this->y() + 50);
-        TeslaBullet* bullet = new TeslaBullet(map, position, Damage, closestEnemy); // Create a new bullet with the specified map, position, damage, and enemy
-        bullets.append(bullet); // Append the bullet to the list of bullets shot by the tower
+        position.setX(this->x()+50);
+        position.setY(this->y()+50);
+        Bullet* bullet = new TeslaBullet(map, position, Damage, enemy); //create a new bullet with the specified map, position, damage, and enemy
+        bullets.append(bullet); //append the bullet to the list of bullets shot by the tower
         connect(bullet, SIGNAL(deleteBulletSignal(Bullet*)), this, SLOT(handleDeleteBulletSignal(Bullet*)));
     }
 }

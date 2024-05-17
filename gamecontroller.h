@@ -28,6 +28,7 @@ signals:
 public slots:
     void spawnWave();
     void startWaves();
+    void handleTowerShooting(Tower* tower);
 
 private:
     Map* map;
@@ -60,6 +61,9 @@ private:
 
     void UpgradeTower();
     bool towerbuilt(int x,int y);
+
+    double calculateDistance(const QPointF& from, const QPointF& to);
+    Enemy* findClosestEnemyWithinRange(Tower* tower);
 
 };
 

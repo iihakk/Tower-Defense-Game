@@ -22,7 +22,7 @@ bool InfernoTower::upgrade(int& playerCurrency) {
     if (ConfirmUpgrade == true){
             if (playerCurrency >= UpgradeCost){
                 playerCurrency -= UpgradeCost;
-                increaseAttributes(3, 10, 2, 75);
+                increaseAttributes(3, 10, 1, 75);
                 UpgradeLevel++;
                 setLevelImage();
                 return true;
@@ -41,13 +41,17 @@ void InfernoTower::setLevelImage() {
 }
 
 void InfernoTower::shoot(){
-    closestEnemy = findClosestEnemyWithinRange(); //Find the closest enemy
-    if(closestEnemy){
+    emit Tower::shoot(this);
+}
+
+void InfernoTower::shoot(Enemy* enemy){
+    if(enemy){
         QPointF position = this->pos();
         position.setX(this->x()+50);
         position.setY(this->y()+50);
-        InfernoBullet* bullet = new InfernoBullet(map, position, Damage, closestEnemy); //create a new bullet with the specified map, position, damage, and enemy
+        Bullet* bullet = new InfernoBullet(map, position, Damage, enemy); //create a new bullet with the specified map, position, damage, and enemy
         bullets.append(bullet); //append the bullet to the list of bullets shot by the tower
         connect(bullet, SIGNAL(deleteBulletSignal(Bullet*)), this, SLOT(handleDeleteBulletSignal(Bullet*)));
     }
 }
+

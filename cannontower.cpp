@@ -22,7 +22,7 @@ bool CannonTower::upgrade(int& playerCurrency) {
     if (ConfirmUpgrade == true){
             if (playerCurrency >= UpgradeCost){
                 playerCurrency -= UpgradeCost;
-                increaseAttributes(2, 5, 1, 50);
+                increaseAttributes(10, 10, 0, 50);
                 UpgradeLevel++;
                 setLevelImage();
                 return true;
@@ -39,12 +39,15 @@ void CannonTower::setLevelImage() {
 }
 
 void CannonTower::shoot(){
-    closestEnemy = findClosestEnemyWithinRange(); //Find the closest enemy
-    if(closestEnemy){
+    emit Tower::shoot(this);
+}
+
+void CannonTower::shoot(Enemy* enemy){
+    if(enemy){
         QPointF position = this->pos();
         position.setX(this->x()+50);
         position.setY(this->y()+50);
-        Bullet* bullet = new CannonBullet(map, position, Damage, closestEnemy); //create a new bullet with the specified map, position, damage, and enemy
+        Bullet* bullet = new CannonBullet(map, position, Damage, enemy); //create a new bullet with the specified map, position, damage, and enemy
         bullets.append(bullet); //append the bullet to the list of bullets shot by the tower
         connect(bullet, SIGNAL(deleteBulletSignal(Bullet*)), this, SLOT(handleDeleteBulletSignal(Bullet*)));
     }

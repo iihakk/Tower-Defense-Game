@@ -71,21 +71,6 @@ void Enemy::move() {
     // Set position to next point on path
     this->setX(enemyPath[currentIndex]->x());
     this->setY(enemyPath[currentIndex++]->y());
-
-    // Handles the colliding items
-    // QList<QGraphicsItem *> collideItems = collidingItems();
-    // for (int i = 0; i < collideItems.size(); ++i) {
-    //     Bullet *bullet = dynamic_cast<Bullet*>(collideItems[i]);
-    //     if (bullet) {
-    //         bullet->getMap()->removeItem(bullet);
-    //         takeDamage(bullet->getDamage());
-    //         delete bullet;
-    //         bullet = nullptr;
-    //         return;
-    //     }
-    //     if (!bullet)
-    //         return;
-    // }
 }
 
 void Enemy::takeDamage(int damage) {

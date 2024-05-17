@@ -10,6 +10,10 @@ public:
     TeslaTower(Map* map, int posX, int posY);
     bool upgrade(int& playerCurrency) override;
     void shoot() override;
+    void shoot(Enemy* enemy) override;
+
+signals:
+    void shoot(Tower* tower);
 
 public slots:
     void handleDeleteBulletSignal(Bullet* bullet);

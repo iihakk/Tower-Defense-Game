@@ -46,12 +46,6 @@ void Bullet::move() {
             this->setY(bulletYPosition - bulletSpeed);
         }
     }
-    // Check for collision with the enemy
-    // if (this->collidesWithItem(enemy)) {
-    //     this->scene()->removeItem(this);
-    //     enemy->takeDamage(damage); // Inflict damage to the enemy
-    //     delete this; // Destroy the bullet
-    // }
 
     QList<QGraphicsItem *> collideItems = collidingItems();
     for (int i = 0; i < collideItems.size(); ++i) {

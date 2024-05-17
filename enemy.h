@@ -19,7 +19,9 @@ public:
     {
         return isAlive;
     }
-
+    void setAlive(bool isAlive){
+        this->isAlive = isAlive;
+    }
 public slots:
     void move();
     void takeDamage(int damage);

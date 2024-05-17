@@ -23,7 +23,7 @@ bool XbowTower::upgrade(int& playerCurrency) {
         if (UpgradeLevel < MaxUpgradeLevel) {
             if (playerCurrency >= UpgradeCost){
                 playerCurrency -= UpgradeCost;
-                increaseAttributes(5, 20, 3, 100);
+                increaseAttributes(1, 0, 0, 100);
                 UpgradeLevel++;
                 setLevelImage();
                 return true;
@@ -44,13 +44,17 @@ void XbowTower::setLevelImage() {
 }
 
 void XbowTower::shoot() {
-    closestEnemy = findClosestEnemyWithinRange(); // Find the closest enemy
-    if (closestEnemy) {
+    emit Tower::shoot(this);
+}
+
+void XbowTower::shoot(Enemy* enemy){
+    if(enemy){
         QPointF position = this->pos();
-        position.setX(this->x() + 50);
-        position.setY(this->y() + 50);
-        XbowBullet* bullet = new XbowBullet(map, position, Damage, closestEnemy); // Create a new bullet with the specified map, position, damage, and enemy
-        bullets.append(bullet); // Append the bullet to the list of bullets shot by the tower
+        position.setX(this->x()+50);
+        position.setY(this->y()+50);
+        Bullet* bullet = new XbowBullet(map, position, Damage, enemy); //create a new bullet with the specified map, position, damage, and enemy
+        bullets.append(bullet); //append the bullet to the list of bullets shot by the tower
         connect(bullet, SIGNAL(deleteBulletSignal(Bullet*)), this, SLOT(handleDeleteBulletSignal(Bullet*)));
     }
 }
+
