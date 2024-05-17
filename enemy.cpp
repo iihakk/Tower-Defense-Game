@@ -105,3 +105,6 @@ void Enemy::setHealthBarColor(const QString& color) {
 int Enemy::getHealth() const {
     return health;
 }
+
+int Enemy::GetMaxHealth(){
+    return maxHealth;}

@@ -29,7 +29,7 @@ public slots:
 
 protected:
     Map* map;
-    Enemy* enemy;
+    Enemy* enemy{};
     double damage;
     QTimer* bulletMotionTimer;
     int bulletSpeed = 2; //default value

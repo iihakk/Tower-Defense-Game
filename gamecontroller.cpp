@@ -162,11 +162,11 @@ void GameController::resetLevel() {
     map->setCoinsLabelText(coinbalance);
     currentWaveIndex = 0;
 
-    deleteLater(); // Delete the current GameController instance
-
     GameController* newGameController = new GameController(map);
-}
+    QObject::connect(newGameController, &GameController::playerLost, this, &GameController::handlePlayerLost);
 
+    deleteLater(); // Delete the current GameController instance
+}
 void GameController::closeGame() {
     QApplication::quit();
 }
@@ -180,7 +180,7 @@ void GameController::placecannon(){
             map->Coins -=500;
             coinbalance -= 500;
             map->setCoinsLabelText(coinbalance);
-
+            UpgradeSound->play();
             CannonTower* newCannon = new CannonTower(map, tile->x(),tile->y());
             towers.append(newCannon);
             connect(newCannon, SIGNAL(shoot(Tower*)), this, SLOT(handleTowerShooting(Tower*)));
@@ -232,6 +232,7 @@ void GameController::placeinferno(){
             map->Coins -=750;
             coinbalance -= 750;
             map->setCoinsLabelText(coinbalance);
+            UpgradeSound->play();
 
             InfernoTower* newInferno = new InfernoTower(map, tile->x(), tile->y());
             towers.append(newInferno);
@@ -249,7 +250,7 @@ void GameController::placexbow(){
             map->Coins -=1000;
             coinbalance -= 1000;
             map->setCoinsLabelText(coinbalance);
-
+            UpgradeSound->play();
             XbowTower* newXbow = new XbowTower(map, tile->x(), tile->y());
             towers.append(newXbow);
             connect(newXbow, SIGNAL(shoot(Tower*)), this, SLOT(handleTowerShooting(Tower*)));
@@ -267,6 +268,7 @@ void GameController::placetesla(){
             map->Coins -=1500;
             coinbalance -= 1500;
             map->setCoinsLabelText(coinbalance);
+            UpgradeSound->play();
 
             TeslaTower* newTesla = new TeslaTower(map, tile->x(), tile->y());
             towers.append(newTesla);

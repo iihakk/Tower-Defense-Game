@@ -24,7 +24,7 @@ Bullet::~Bullet() {
 }
 
 void Bullet::move() {
-    if (enemy == nullptr ||  (!enemy->isALive())){
+    if (enemy == nullptr ||  (!enemy->isALive()) || (enemy->GetMaxHealth()!=100)){
         delete this;
         return;
     }

@@ -19,6 +19,7 @@ StartMenu::StartMenu(QWidget *parent)
     ui->towerDefenseTitleLabel->setAttribute(Qt::WA_TranslucentBackground, true);
     ui->towerDefenseTitleLabel->hide();
     gameMusic = new QSoundEffect(this);
+    gameMusic->setLoopCount(20);
     gameMusic->setSource(QUrl("qrc:/Music/GameMusic.wav"));
 }
 
