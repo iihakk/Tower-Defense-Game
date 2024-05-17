@@ -13,7 +13,7 @@ Enemy::Enemy(Map* map) : QObject(), QGraphicsPixmapItem() {
     maxHealth = 100;
     isAlive = true;
 
-    setPixmap(QPixmap(":/OtherImages/Enemy_Dropper_Ballon.png").scaled(79, 100));
+    setPixmap(QPixmap(":/OtherImages/Enemy_Dropper_Ballon.png").scaled(80, 100));
 
     motionTimer = new QTimer();
     connect(motionTimer, SIGNAL(timeout()), this, SLOT(move()));

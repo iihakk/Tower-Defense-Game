@@ -6,8 +6,8 @@
 GameController::GameController(Map* map)
     : QObject(),
     currentWaveIndex(0),
-    totalWaves(4),
-    numEnemiesPerWave(12),
+    totalWaves(5),
+    numEnemiesPerWave(10),
     waveInterval(5000),
     waveDuration(10000),
     playerHealth(100), // Initialize playerHealth with an initial value
@@ -82,7 +82,9 @@ void GameController::spawnEnemy()
 //if an enemy is destroyed, remove the enemy and all the bullets that headed towards the now dead enemy
 void GameController::handleEnemyDestroyed(Enemy* destroyedEnemy) {
     if (destroyedEnemy) {
-        BalloonDie->play();
+        if (!BalloonDie->isPlaying()) {
+            BalloonDie->play();
+        }
         // increase coin balance
         coinbalance += 150;
         map->setCoinsLabelText(coinbalance);
@@ -123,6 +125,7 @@ void GameController::handlePlayerLost(){
     msg->setWindowTitle("GAME OVER");
     msg->setText("GAME OVER");
     msg->show();
+    disconnect(this, &GameController::playerLost, this, &GameController::handlePlayerLost);
 
     // close the game
 }
