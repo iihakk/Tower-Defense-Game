@@ -9,9 +9,6 @@
 #include <gamecontroller.h>
 
 
-
-
-
 StartMenu::StartMenu(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::StartMenu)

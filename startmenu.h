@@ -27,11 +27,9 @@ private slots:
 
     void on_helpbutton_clicked();
 
-
-
-
 private:
     Ui::StartMenu *ui;
+
     QSoundEffect* gameMusic;
 
     Map* map;

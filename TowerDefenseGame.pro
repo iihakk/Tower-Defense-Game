@@ -22,12 +22,10 @@ SOURCES += \
     main.cpp \
     map.cpp \
     help.cpp \
-    secondhelper.cpp \
     shop.cpp \
     startmenu.cpp \
     teslabullet.cpp \
     teslatower.cpp \
-    thirdhelp.cpp \
     tower.cpp \
     xbowbullet.cpp \
     xbowtower.cpp
@@ -42,22 +40,18 @@ HEADERS += \
     infernotower.h \
     map.h \
     help.h \
-    secondhelper.h \
     shop.h \
     startmenu.h \
     teslabullet.h \
     teslatower.h \
-    thirdhelp.h \
     tower.h \
     xbowbullet.h \
     xbowtower.h
 
 FORMS += \
     help.ui \
-    secondhelper.ui \
     shop.ui \
-    startmenu.ui \
-    thirdhelp.ui
+    startmenu.ui
 
 
 # Default rules for deployment.
