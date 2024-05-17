@@ -59,7 +59,6 @@ void Tower::maximumtowerlevel()
     QMessageBox *maxTowerLevelBox = new QMessageBox();
     maxTowerLevelBox->setWindowTitle("Maximum Tower Level");
     maxTowerLevelBox->setText("You've reached the maximum level for this tower.");
-    maxTowerLevelBox->setFont(QFont("Franklin Gothic Heavy"));
     maxTowerLevelBox->show();
 }
 
