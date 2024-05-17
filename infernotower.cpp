@@ -11,7 +11,6 @@ InfernoTower::InfernoTower(Map* map) : Tower(20, 200, 120, 250, 4, map) {
 }
 
 InfernoTower::InfernoTower(Map* map, int posX, int posY) : InfernoTower(map) {
-    setLevelImage();
     this->setX(posX);
     this->setY(posY);
 }

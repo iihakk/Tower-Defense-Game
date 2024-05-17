@@ -19,12 +19,9 @@ public:
     virtual bool upgrade(int& playerCurrency) = 0;
     virtual void setLevelImage() = 0;
 
-    //Enemy* getClosestEnemy() const;
     QList<Bullet*> bullets;
     QTimer* towerShootingTimer;
 
-    //void setClosestEnemy(Enemy* enemy);
-    //void setEnemies(QList<Enemy*>& enemies);
     void stopShootingTimer();
 
     int getlevel();
@@ -51,8 +48,6 @@ protected:
     int UpgradeCost;
     int UpgradeLevel;
     static const int MaxUpgradeLevel = 2;
-    //Enemy* closestEnemy;
-    //QList<Enemy*> enemies;
     bool ConfirmUpgrade;
 
 

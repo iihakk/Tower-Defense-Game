@@ -11,7 +11,6 @@ TeslaTower::TeslaTower(Map* map) : Tower(5, 180, 250, 400, 10, map) {
 }
 
 TeslaTower::TeslaTower(Map* map, int posX, int posY) : TeslaTower(map) {
-    setLevelImage();
     this->setX(posX);
     this->setY(posY);
 }

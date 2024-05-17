@@ -77,10 +77,6 @@ void GameController::spawnEnemy()
 
     connect(enemy, &Enemy::enemyDestroyed, this, &GameController::handleEnemyDestroyed);
     connect(enemy, &Enemy::enemyDissapeared, this, &GameController::handleEnemyDissapeared);
-
-    // for(int i =0 ; i< towers.size(); i++){
-    //     towers[i]->setEnemies(enemies);
-    // }
 }
 
 //if an enemy is destroyed, remove the enemy and all the bullets that headed towards the now dead enemy
@@ -92,10 +88,6 @@ void GameController::handleEnemyDestroyed(Enemy* destroyedEnemy) {
         map->setCoinsLabelText(coinbalance);
 
         enemies.removeOne(destroyedEnemy);
-
-        // for(int i =0 ; i< towers.size(); i++){
-        //     towers[i]->setEnemies(enemies);
-        // }
 
         for(int i = 0; i < towers.size(); i++){
             for(int j = 0; j < towers[i]->bullets.size(); j++){
@@ -117,9 +109,6 @@ void GameController::handleEnemyDestroyed(Enemy* destroyedEnemy) {
 void GameController::handleEnemyDissapeared(Enemy* enemy){
     enemy->setAlive(false);
     enemies.removeOne(enemy);
-    // for(int i =0 ; i< towers.size(); i++){
-    //     towers[i]->setEnemies(enemies);
-    // }
     playerHealth -= 10;
     map->setHealthLabelText(playerHealth);
     if(playerHealth <= 0){

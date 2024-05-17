@@ -16,9 +16,9 @@ Tower::Tower(int dmg, int hlth, int cst, int rng, int fireR, Map* map)
 }
 
 Tower::~Tower(){
-    for(Bullet* bullet: bullets){
-        this->scene()->removeItem(bullet);
-    }
+    // for(Bullet* bullet: bullets){
+    //     this->scene()->removeItem(bullet);
+    // }
     this->scene()->removeItem(this);
 }
 
@@ -70,56 +70,6 @@ void Tower::insufficientbalance()
     insufficientCoinsBox->setText("You don't have enough coins to upgrade this tower");
     insufficientCoinsBox->show();
 }
-
-
-// //Change the closest enemy to the specified enemy
-// void Tower::setClosestEnemy(Enemy* enemy){
-//     closestEnemy = enemy;
-// }
-
-// //Returns the closest enemy
-// Enemy* Tower::getClosestEnemy() const{
-//     return closestEnemy;
-// }
-
-// //Change the list of enemies
-// void Tower::setEnemies(QList<Enemy*>& enemies){
-//     this->enemies = enemies;
-// }
-
-// //Calculate the distance between two points
-// double Tower::calculateDistance(const QPointF& from, const QPointF& to) {
-//     return sqrt(pow(from.x() - to.x(), 2) + pow(from.y() - to.y(), 2));
-// }
-
-// //Find the closest enemy within range
-// Enemy* Tower::findClosestEnemyWithinRange(){
-
-//     //Set the closest enemy to be at infinite distance
-//     double closestEnemyDistance = INT_MAX;
-//     int indexClosestEnemy = -1;
-//     double currentDistance = INT_MAX;
-//     for(int i = 0; i < enemies.size();i++){
-//         if(enemies[i]->scene() == map){
-//             QPointF enemyPos = enemies[i]->pos();
-//             currentDistance = calculateDistance(enemyPos, this->pos());
-//             if(currentDistance <= Range && currentDistance < closestEnemyDistance){ //If the enemy is closer than the closest enemy and within range update the closest
-//                 closestEnemyDistance = currentDistance;
-//                 indexClosestEnemy = i;
-//             }
-//         }
-//     }
-
-//     if(indexClosestEnemy == -1){
-//         return nullptr;
-//     }
-
-//     if(enemies[indexClosestEnemy]){
-//         return enemies[indexClosestEnemy];
-//     }
-
-//     return nullptr;
-// }
 
 void Tower::handleDeleteBulletSignal(Bullet* bullet){
     bullets.removeAll(bullet);

@@ -11,7 +11,6 @@ XbowTower::XbowTower(Map* map) : Tower(1, 150, 200, 300, 20, map) {
 }
 
 XbowTower::XbowTower(Map* map, int posX, int posY) : XbowTower(map) {
-    setLevelImage();
     this->setX(posX);
     this->setY(posY);
 }
