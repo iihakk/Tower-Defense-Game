@@ -6,7 +6,7 @@ const std::vector<QString> CannonTower::levelImages = {
     ":/TowerImages/Cannon3.png"
 };
 
-CannonTower::CannonTower(Map* map) : Tower(10, 150, 100, 200, 1, map) {
+CannonTower::CannonTower(Map* map) : Tower(40, 100, 100, 200, 1, map) {
     setLevelImage();
 }
 
@@ -44,7 +44,8 @@ void CannonTower::shoot(){
         QPointF position = this->pos();
         position.setX(this->x()+50);
         position.setY(this->y()+50);
-        CannonBullet* bullet = new CannonBullet(map, position, Damage, closestEnemy); //create a new bullet with the specified map, position, damage, and enemy
+        Bullet* bullet = new CannonBullet(map, position, Damage, closestEnemy); //create a new bullet with the specified map, position, damage, and enemy
         bullets.append(bullet); //append the bullet to the list of bullets shot by the tower
+        connect(bullet, SIGNAL(deleteBulletSignal(Bullet*)), this, SLOT(handleDeleteBulletSignal(Bullet*)));
     }
 }

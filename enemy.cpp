@@ -61,34 +61,31 @@ Enemy::~Enemy() {
 }
 
 void Enemy::move() {
-    size_t currentIndex = indexEnemyOnPath(this);
-
     // If the enemy has passed the whole path
     if(currentIndex+1 == enemyPath.size()){
         motionTimer->stop(); // Stop the timer
         // Emit the enemyDissapeared signal to be handled by the appropriate function (decrease player health)
         emit enemyDissapeared(this);
-
         return;
     }
     // Set position to next point on path
-    this->setX(enemyPath[currentIndex+1]->x());
-    this->setY(enemyPath[currentIndex+1]->y());
+    this->setX(enemyPath[currentIndex]->x());
+    this->setY(enemyPath[currentIndex++]->y());
 
     // Handles the colliding items
-    QList<QGraphicsItem *> collideItems = collidingItems();
-    for (int i = 0; i < collideItems.size(); ++i) {
-        Bullet *bullet = dynamic_cast<Bullet*>(collideItems[i]);
-        if (bullet) {
-            bullet->getMap()->removeItem(bullet);
-            takeDamage(bullet->getDamage());
-            delete bullet;
-            bullet = nullptr;
-            return;
-        }
-        if (!bullet)
-            return;
-    }
+    // QList<QGraphicsItem *> collideItems = collidingItems();
+    // for (int i = 0; i < collideItems.size(); ++i) {
+    //     Bullet *bullet = dynamic_cast<Bullet*>(collideItems[i]);
+    //     if (bullet) {
+    //         bullet->getMap()->removeItem(bullet);
+    //         takeDamage(bullet->getDamage());
+    //         delete bullet;
+    //         bullet = nullptr;
+    //         return;
+    //     }
+    //     if (!bullet)
+    //         return;
+    // }
 }
 
 void Enemy::takeDamage(int damage) {
@@ -117,18 +114,6 @@ void Enemy::updateHealthBar() {
 void Enemy::setHealthBarColor(const QString& color) {
     // Set the stylesheet to change the color of the health bar
     healthBar.setStyleSheet("QProgressBar::chunk { background-color: " + color + "; }");
-}
-
-// Returns the index of the enemy on the path
-// If the enemy is not found returns -1
-int Enemy::indexEnemyOnPath(Enemy* enemy) {
-
-    for(size_t i = 0; i < enemyPath.size(); i++) {
-        if(enemy->x() == enemyPath[i]->x() && enemy->y() == enemyPath[i]->y()) {
-            return i;
-        }
-    }
-    return -1;
 }
 
 // Returns enemy health

@@ -11,6 +11,10 @@ public:
     bool upgrade(int& playerCurrency) override;
     void setLevelImage() override;
 
+public slots:
+    void handleDeleteBulletSignal(Bullet* bullet);
+
+
 private:
     void shoot() override;
     static const std::vector<QString> levelImages;

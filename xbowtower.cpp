@@ -6,7 +6,7 @@ const std::vector<QString> XbowTower::levelImages = {
     ":/TowerImages/Xbow3.png"
 };
 
-XbowTower::XbowTower(Map* map) : Tower(10, 150, 200, 300, 1, map) {
+XbowTower::XbowTower(Map* map) : Tower(1, 150, 200, 300, 20, map) {
     setLevelImage();
 }
 
@@ -51,5 +51,6 @@ void XbowTower::shoot() {
         position.setY(this->y() + 50);
         XbowBullet* bullet = new XbowBullet(map, position, Damage, closestEnemy); // Create a new bullet with the specified map, position, damage, and enemy
         bullets.append(bullet); // Append the bullet to the list of bullets shot by the tower
+        connect(bullet, SIGNAL(deleteBulletSignal(Bullet*)), this, SLOT(handleDeleteBulletSignal(Bullet*)));
     }
 }

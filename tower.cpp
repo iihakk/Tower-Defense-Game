@@ -12,7 +12,7 @@ Tower::Tower(int dmg, int hlth, int cst, int rng, int fireR, Map* map)
 
     towerShootingTimer = new QTimer();
     connect(towerShootingTimer, SIGNAL(timeout()), this, SLOT(shoot()));
-    towerShootingTimer->start(1000);
+    towerShootingTimer->start(4000/FiringRate);
 }
 
 Tower::~Tower(){
@@ -119,4 +119,9 @@ Enemy* Tower::findClosestEnemyWithinRange(){
     }
 
     return nullptr;
+}
+
+void Tower::handleDeleteBulletSignal(Bullet* bullet){
+    bullets.removeAll(bullet);
+    delete bullet;
 }

@@ -34,9 +34,10 @@ private:
     int health;
     int maxHealth;
     bool isAlive;
+    int currentIndex = 0;
+
     Map *map;
     QTimer *motionTimer;
-    int indexEnemyOnPath(Enemy *);
     QProgressBar healthBar;
 
     std::vector<QPoint*> enemyPath;

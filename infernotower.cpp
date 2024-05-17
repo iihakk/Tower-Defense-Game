@@ -6,7 +6,7 @@ const std::vector<QString> InfernoTower::levelImages = {
     ":/TowerImages/Inferno3.png"
 };
 
-InfernoTower::InfernoTower(Map* map) : Tower(15, 200, 120, 250, 1, map) {
+InfernoTower::InfernoTower(Map* map) : Tower(20, 200, 120, 250, 4, map) {
     setLevelImage();
 }
 
@@ -48,5 +48,6 @@ void InfernoTower::shoot(){
         position.setY(this->y()+50);
         InfernoBullet* bullet = new InfernoBullet(map, position, Damage, closestEnemy); //create a new bullet with the specified map, position, damage, and enemy
         bullets.append(bullet); //append the bullet to the list of bullets shot by the tower
+        connect(bullet, SIGNAL(deleteBulletSignal(Bullet*)), this, SLOT(handleDeleteBulletSignal(Bullet*)));
     }
 }

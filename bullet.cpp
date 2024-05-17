@@ -23,6 +23,48 @@ Bullet::~Bullet() {
     }
 }
 
+void Bullet::move() {
+    if (enemy == nullptr ||  (!enemy->isALive())){
+        delete this;
+        return;
+    }
+    double bulletXPosition = this->x();
+    double bulletYPosition = this->y();
+    double enemyXPosition = enemy->x();
+    double enemyYPosition = enemy->y();
+
+    if (this->pos() != enemy->pos()) {
+        if (enemyXPosition > bulletXPosition) {
+            this->setX(bulletXPosition + bulletSpeed);
+        } else if (enemyXPosition < bulletXPosition) {
+            this->setX(bulletXPosition - bulletSpeed);
+        }
+
+        if (enemyYPosition > bulletYPosition) {
+            this->setY(bulletYPosition + bulletSpeed);
+        } else if (enemyYPosition < bulletYPosition) {
+            this->setY(bulletYPosition - bulletSpeed);
+        }
+    }
+    // Check for collision with the enemy
+    // if (this->collidesWithItem(enemy)) {
+    //     this->scene()->removeItem(this);
+    //     enemy->takeDamage(damage); // Inflict damage to the enemy
+    //     delete this; // Destroy the bullet
+    // }
+
+    QList<QGraphicsItem *> collideItems = collidingItems();
+    for (int i = 0; i < collideItems.size(); ++i) {
+        Enemy *collidingEnemy= dynamic_cast<Enemy*>(collideItems[i]);
+        if (collidingEnemy) {
+            this->scene()->removeItem(this);
+            enemy->takeDamage(damage); // Inflict damage to the enemy
+            emit deleteBulletSignal(this); // Destroy the bullet
+            return;
+        }
+    }
+}
+
 void Bullet::setDamage(int newDamage) {
     damage = newDamage;
 }

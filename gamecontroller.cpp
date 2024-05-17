@@ -6,8 +6,8 @@
 GameController::GameController(Map* map)
     : QObject(),
     currentWaveIndex(0),
-    totalWaves(2),
-    numEnemiesPerWave(5),
+    totalWaves(4),
+    numEnemiesPerWave(12),
     waveInterval(5000),
     waveDuration(10000),
     playerHealth(100), // Initialize playerHealth with an initial value

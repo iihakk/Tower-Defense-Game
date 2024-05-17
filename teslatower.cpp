@@ -6,7 +6,7 @@ const std::vector<QString> TeslaTower::levelImages = {
     ":/TowerImages/Tesla3.png"
 };
 
-TeslaTower::TeslaTower(Map* map) : Tower(15, 180, 250, 400, 1, map) {
+TeslaTower::TeslaTower(Map* map) : Tower(5, 180, 250, 400, 10, map) {
     setLevelImage();
 }
 
@@ -48,5 +48,6 @@ void TeslaTower::shoot() {
         position.setY(this->y() + 50);
         TeslaBullet* bullet = new TeslaBullet(map, position, Damage, closestEnemy); // Create a new bullet with the specified map, position, damage, and enemy
         bullets.append(bullet); // Append the bullet to the list of bullets shot by the tower
+        connect(bullet, SIGNAL(deleteBulletSignal(Bullet*)), this, SLOT(handleDeleteBulletSignal(Bullet*)));
     }
 }

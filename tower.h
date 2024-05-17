@@ -35,6 +35,7 @@ public:
 
 public slots:
     virtual void shoot() = 0;
+    void handleDeleteBulletSignal(Bullet* bullet);
 
 protected:
     int Damage;
