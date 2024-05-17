@@ -10,8 +10,8 @@
 #include "infernotower.h"
 #include "xbowtower.h"
 #include "teslatower.h"
-#include "QMediaPlayer"
-#include "QSoundEffect"
+#include <QMediaPlayer>
+#include <QSoundEffect>
 
 class GameController : public QObject
 {
@@ -53,6 +53,8 @@ private:
     void handleEnemyDestroyed(Enemy* destroyedEnemy);
     void handleEnemyDissapeared(Enemy* enemy);
     void handlePlayerLost();
+    void resetLevel(); // Add resetLevel declaration
+    void closeGame(); // Add closeGame declaration
 
     void placexbow();
     void placetesla();
@@ -60,7 +62,7 @@ private:
     void placecannon();
 
     void UpgradeTower();
-    bool towerbuilt(int x,int y);
+    bool towerbuilt(int x, int y);
 
     double calculateDistance(const QPointF& from, const QPointF& to);
     Enemy* findClosestEnemyWithinRange(Tower* tower);

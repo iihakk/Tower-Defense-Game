@@ -2,12 +2,14 @@
 #include <QMouseEvent>
 #include <iostream>
 #include <QMessageBox>
+#include <QApplication> // Add this include
+
 
 GameController::GameController(Map* map)
     : QObject(),
     currentWaveIndex(0),
     totalWaves(5),
-    numEnemiesPerWave(10),
+    numEnemiesPerWave(25),
     waveInterval(5000),
     waveDuration(10000),
     playerHealth(100), // Initialize playerHealth with an initial value
@@ -49,13 +51,15 @@ void GameController::setTotalWaves(int totalWaves)
 //spawns a wave of enemies
 void GameController::spawnWave()
 {
-    if (currentWaveIndex >= totalWaves) {
+    if (currentWaveIndex >= totalWaves || playerHealth <= 0) {
         waveTimer->stop();
         return;
     }
 
-    for (int i = 0; i < numEnemiesPerWave; i++) {
-        QTimer::singleShot(i * (waveDuration / numEnemiesPerWave), this, &GameController::spawnEnemy);
+    if (playerHealth > 0) {
+        for (int i = 0; i < numEnemiesPerWave; i++) {
+            QTimer::singleShot(i * (waveDuration / numEnemiesPerWave), this, &GameController::spawnEnemy);
+        }
     }
 
     currentWaveIndex++;
@@ -64,19 +68,23 @@ void GameController::spawnWave()
 //starts the waves
 void GameController::startWaves()
 {
-    spawnWave();
-    waveTimer->start(waveInterval + waveDuration);
+    if (playerHealth > 0) {
+        spawnWave();
+        waveTimer->start(waveInterval + waveDuration);
+    }
 }
 
 //spawns an enemy into existence
 void GameController::spawnEnemy()
 {
-    BalloonSpawn->play();
-    Enemy *enemy = new Enemy(map);
-    enemies.append(enemy);
+    if (playerHealth > 0) {
+        BalloonSpawn->play();
+        Enemy *enemy = new Enemy(map);
+        enemies.append(enemy);
 
-    connect(enemy, &Enemy::enemyDestroyed, this, &GameController::handleEnemyDestroyed);
-    connect(enemy, &Enemy::enemyDissapeared, this, &GameController::handleEnemyDissapeared);
+        connect(enemy, &Enemy::enemyDestroyed, this, &GameController::handleEnemyDestroyed);
+        connect(enemy, &Enemy::enemyDissapeared, this, &GameController::handleEnemyDissapeared);
+    }
 }
 
 //if an enemy is destroyed, remove the enemy and all the bullets that headed towards the now dead enemy
@@ -114,20 +122,53 @@ void GameController::handleEnemyDissapeared(Enemy* enemy){
     playerHealth -= 10;
     map->setHealthLabelText(playerHealth);
     if(playerHealth <= 0){
+        waveTimer->stop();
         emit playerLost();
     }
     delete enemy;
 }
 
 void GameController::handlePlayerLost(){
-
-    QMessageBox * msg = new QMessageBox();
-    msg->setWindowTitle("GAME OVER");
-    msg->setText("GAME OVER");
-    msg->show();
+    waveTimer->stop();
     disconnect(this, &GameController::playerLost, this, &GameController::handlePlayerLost);
+    for (Enemy* enemy : enemies) {
+        delete enemy;
+    }
+    enemies.clear();
+    QMessageBox msgBox;
+    msgBox.setWindowTitle("GAME OVER");
+    msgBox.setText("GAME OVER");
 
-    // close the game
+    QPushButton *tryAgainButton = msgBox.addButton(tr("Try Again"), QMessageBox::ActionRole);
+    QPushButton *quitButton = msgBox.addButton(tr("Quit"), QMessageBox::RejectRole);
+
+    msgBox.exec();
+
+    if (msgBox.clickedButton() == tryAgainButton) {
+        resetLevel();
+    } else if (msgBox.clickedButton() == quitButton) {
+        closeGame();
+    }
+}
+
+void GameController::resetLevel() {
+    for (Tower* tower : towers) {
+        delete tower;
+    }
+    towers.clear();
+    playerHealth = 100;
+    map->setHealthLabelText(playerHealth);
+    coinbalance = 5000;
+    map->setCoinsLabelText(coinbalance);
+    currentWaveIndex = 0;
+
+    deleteLater(); // Delete the current GameController instance
+
+    GameController* newGameController = new GameController(map);
+}
+
+void GameController::closeGame() {
+    QApplication::quit();
 }
 
 void GameController::placecannon(){
