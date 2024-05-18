@@ -13,6 +13,7 @@ Map::Map(int level) {
     // initialize health, score and level variables with correct values
     this->level = level;
     health = 100;
+    Coins =1000;
     QGraphicsScene();
     startScene();
 }
@@ -77,7 +78,7 @@ void Map::startScene(){
     // place labels in correct position
     levellabel->setGeometry(QRectF(700,50,20,10));
     healthlabel->setGeometry(QRectF(5,0,20,10));
-    coinslabel->setGeometry(QRectF(5,50,100,10));
+    coinslabel->setGeometry(QRectF(5,50,150,10));
 
     // initialize health, score and level labels with correct values
     setHealthLabelText(health);
