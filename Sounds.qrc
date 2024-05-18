@@ -4,7 +4,7 @@
     </qresource>
     <qresource prefix="/Effects">
         <file>BalloonDie.wav</file>
-        <file>BalloonSpawn.wav</file>
         <file>UpgradeSound.wav</file>
+        <file>BalloonSpawn.wav</file>
     </qresource>
 </RCC>

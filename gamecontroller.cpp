@@ -91,7 +91,9 @@ void GameController::startWaves()
 void GameController::spawnEnemy()
 {
     if (playerHealth > 0) {
-        BalloonSpawn->play();
+        if (!BalloonSpawn->isPlaying()){
+            BalloonSpawn->play();
+        }
         Enemy *enemy = new Enemy(map);
         enemies.append(enemy);
 
@@ -241,6 +243,7 @@ void GameController::startNextLevel(int newLevel){
     Map* newMap = new Map(newLevel);
     view->setScene(newMap);
     GameController* newGameController = new GameController(newMap, newLevel, view);
+    QObject::connect(newGameController, &GameController::playerLost, this, &GameController::handlePlayerLost);
 
     deleteLater();
 }
