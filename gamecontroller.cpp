@@ -200,7 +200,7 @@ void GameController::nextLevel(){
     if(newLevel > 5){
         QMessageBox msgBox;
         msgBox.setWindowTitle("THE CONQUERER");
-        msgBox.setText("CONQUERED EARTH");
+        msgBox.setText("YOU CONQUERED EARTH");
 
         QPushButton *tryAgainButton = msgBox.addButton(tr("Reconquer"), QMessageBox::ActionRole);
         QPushButton *quitButton = msgBox.addButton(tr("Quit"), QMessageBox::RejectRole);
@@ -216,7 +216,7 @@ void GameController::nextLevel(){
     else{
         QMessageBox msgBox;
         msgBox.setWindowTitle("THE CONQUERER");
-        msgBox.setText("CONQUERED THIS LEVEL");
+        msgBox.setText("YOU CONQUERED THIS LEVEL");
 
         QPushButton *nextLevel = msgBox.addButton(tr("Next Level"), QMessageBox::ActionRole);
         QPushButton *playAgainButton= msgBox.addButton(tr("Play Again"), QMessageBox::ActionRole);

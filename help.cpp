@@ -12,6 +12,7 @@ help::help(QWidget *parent)
     ui->informationLineEdit->setReadOnly(true);
     ui->gameObjectivesLabel->setAttribute(Qt::WA_TintedBackground, true);
     ui->gameObjectivesLabel->setAttribute(Qt::WA_TranslucentBackground, true);
+    ui->informationLineEdit->setAttribute(Qt::WA_TintedBackground, true);
     ui->informationLineEdit->setAttribute(Qt::WA_TranslucentBackground, true);
     ui->informationLineEdit->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->informationLineEdit->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
