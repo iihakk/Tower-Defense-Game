@@ -143,7 +143,24 @@ void Map::createTiles(){
     }
 }
 
+void Map::setHealth(double newHealth)
+{
+    health = newHealth;
+    setHealthLabelText(health);
+}
+
 //Creates a path of tiles on which the enemies will move
+void Map::setCoins(int newCoins)
+{
+    Coins = newCoins;
+    setCoinsLabelText(Coins);
+}
+
+int Map::getCoins() const
+{
+    return Coins;
+}
+
 void Map::createPath(int level){
     //an extra check to ensure that both paths do not contain already created code
     if(!path.empty()){
@@ -215,11 +232,11 @@ void Map::createPath(int level){
 
     else if(level == 3){
         //The shift points, the enemy will keep moving until it reaches them, then shifts
-        double shift1Y = 600, shift1X = 500, shift2Y = 100, shift2X = 1100;
+        double shift1Y = 600, shift1X = 500, shift2Y = 0, shift2X = 1100;
         double endpoint = 1500; //adjusted to the height of the enemy (100 pixels) (here, on the x-axis)
 
         double indexX = 0;
-        double indexY = 0;
+        double indexY = 100;
 
         while(indexX < shift1X){
             getPath(shift1X, indexX, indexY, true);
@@ -242,7 +259,7 @@ void Map::createPath(int level){
     }
 
     //this level has two paths so it initializes path1 and path2 as opposite yet identical paths
-    else if(level == 4){
+    else if(level == 5){
         path2.pop_back(); // remove the no path2 in existence marker
 
         //The shift points, the enemy will keep moving until it reaches them, then shifts
@@ -298,7 +315,7 @@ void Map::createPath(int level){
         }
     }
 
-    else if (level == 5){
+    else if (level == 4){
         path2.pop_back(); // remove the no path2 in existence marker
 
         //The shift points, the enemy will keep moving until it reaches them, then shifts

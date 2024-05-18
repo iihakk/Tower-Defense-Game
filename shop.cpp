@@ -54,7 +54,7 @@ void Shop::on_back_clicked()
 
 void Shop::on_cannonbuy_clicked()
 {
-    if (map->Coins < 500){
+    if (map->getCoins()< 500){
         ui->insufficientbalance->setVisible(true);
     }
     else {
@@ -67,7 +67,7 @@ void Shop::on_cannonbuy_clicked()
 
 void Shop::on_infernobuy_clicked()
 {
-    if (map->Coins < 750){
+    if (map->getCoins() < 750){
         ui->insufficientbalance->setVisible(true);
     }
     else {
@@ -79,7 +79,7 @@ void Shop::on_infernobuy_clicked()
 
 void Shop::on_xbowbuy_clicked()
 {
-    if (map->Coins < 1000){
+    if (map->getCoins() < 1000){
         ui->insufficientbalance->setVisible(true);
     }
     else {
@@ -91,7 +91,7 @@ void Shop::on_xbowbuy_clicked()
 
 void Shop::on_teslabuy_clicked()
 {
-    if (map->Coins < 1500){
+    if (map->getCoins() < 1500){
         ui->insufficientbalance->setVisible(true);
     }
     else {

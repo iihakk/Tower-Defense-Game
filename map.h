@@ -15,6 +15,7 @@ private:
     double enemySpeed = 2.5;
     double health;
     int level;
+    int Coins;
 
     QPushButton *shopbutton;
     QPushButton *upgradebutton;
@@ -39,8 +40,6 @@ public:
     void setCoinsLabelText(int num);
     void showShop();
 
-    int Coins;
-
     int getcoinbalance();
 
     void setEnemySpeed(double numPixelsPerMove);
@@ -48,6 +47,12 @@ public:
     std::vector<QPoint*> path;
     std::vector<QPoint*> path2;
     std::vector<QGraphicsRectItem*> tiles;
+
+    void setHealth(double newHealth);
+
+    void setCoins(int newCoins);
+
+    int getCoins() const;
 
 signals:
     void deploythecannon();

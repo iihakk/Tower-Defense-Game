@@ -3,19 +3,26 @@
 #include <iostream>
 #include <QMessageBox>
 #include <QApplication> // Add this include
+#include <QGraphicsView>
 
-
-GameController::GameController(Map* map)
+GameController::GameController(Map* map, int mapLevel, QGraphicsView* view)
     : QObject(),
-    currentWaveIndex(0),
-    totalWaves(5),
-    numEnemiesPerWave(25),
-    waveInterval(5000),
-    waveDuration(10000),
-    playerHealth(100), // Initialize playerHealth with an initial value
-    coinbalance(5000) //initialize coin balance
+    currentWaveIndex(0)
 {
     this->map = map;
+    this->view = view;
+
+    this->mapLevel = mapLevel;
+    numEnemiesPerWave = 10+((this->mapLevel*5)/2);
+    waveDuration = 10000 + 1000*mapLevel;
+    totalWaves = ((this->mapLevel) == 1)?2:(this->mapLevel);
+    playerHealth = 100 + (this->mapLevel)*10;
+    coinbalance = 3000+400*(this->mapLevel);
+    waveInterval = 5000 + 1000 * mapLevel;
+    numFinishedEnemies = totalWaves*numEnemiesPerWave;
+
+    map->setCoins(coinbalance);
+    map->setHealth(playerHealth);
 
     BalloonSpawn = new QSoundEffect(this);
     BalloonSpawn->setSource(QUrl("qrc:/Effects/BalloonSpawn.wav"));
@@ -97,6 +104,7 @@ void GameController::handleEnemyDestroyed(Enemy* destroyedEnemy) {
         coinbalance += 150;
         map->setCoinsLabelText(coinbalance);
 
+        numFinishedEnemies--;
         enemies.removeOne(destroyedEnemy);
 
         for(int i = 0; i < towers.size(); i++){
@@ -113,11 +121,15 @@ void GameController::handleEnemyDestroyed(Enemy* destroyedEnemy) {
         }
         delete destroyedEnemy;
     }
+    if(numFinishedEnemies == 0 || numFinishedEnemies == -1){
+        nextLevel();
+    }
 }
 
 //if an enemy dissapeared, remove the enemy and decrease the player health
 void GameController::handleEnemyDissapeared(Enemy* enemy){
     enemy->setAlive(false);
+    numFinishedEnemies--;
     enemies.removeOne(enemy);
     playerHealth -= 10;
     map->setHealthLabelText(playerHealth);
@@ -126,6 +138,10 @@ void GameController::handleEnemyDissapeared(Enemy* enemy){
         emit playerLost();
     }
     delete enemy;
+
+    if(numFinishedEnemies == 0 || numFinishedEnemies == -1){
+        nextLevel();
+    }
 }
 
 void GameController::handlePlayerLost(){
@@ -156,17 +172,69 @@ void GameController::resetLevel() {
         delete tower;
     }
     towers.clear();
-    playerHealth = 100;
+    playerHealth = 100 + (this->mapLevel)*10;
     map->setHealthLabelText(playerHealth);
-    coinbalance = 5000;
+    coinbalance = 3000+400*(this->mapLevel);
     map->setCoinsLabelText(coinbalance);
     currentWaveIndex = 0;
 
-    GameController* newGameController = new GameController(map);
+    GameController* newGameController = new GameController(map,mapLevel, view);
     QObject::connect(newGameController, &GameController::playerLost, this, &GameController::handlePlayerLost);
 
     deleteLater(); // Delete the current GameController instance
 }
+
+void GameController::nextLevel(){
+    int newLevel = mapLevel+1;
+    if(newLevel > 5){
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("THE CONQUERER");
+        msgBox.setText("CONQUERED EARTH");
+
+        QPushButton *tryAgainButton = msgBox.addButton(tr("Reconquer"), QMessageBox::ActionRole);
+        QPushButton *quitButton = msgBox.addButton(tr("Quit"), QMessageBox::RejectRole);
+
+        msgBox.exec();
+
+        if (msgBox.clickedButton() == tryAgainButton) {
+            resetLevel();
+        } else if (msgBox.clickedButton() == quitButton) {
+            closeGame();
+        }
+    }
+    else{
+        QMessageBox msgBox;
+        msgBox.setWindowTitle("THE CONQUERER");
+        msgBox.setText("CONQUERED THIS LEVEL");
+
+        QPushButton *nextLevel = msgBox.addButton(tr("Next Level"), QMessageBox::ActionRole);
+        QPushButton *playAgainButton= msgBox.addButton(tr("Play Again"), QMessageBox::ActionRole);
+        QPushButton *quitButton = msgBox.addButton(tr("Quit"), QMessageBox::RejectRole);
+
+        msgBox.exec();
+
+        if(msgBox.clickedButton() == nextLevel){
+            startNextLevel(newLevel);
+        }
+        else if (msgBox.clickedButton() == playAgainButton) {
+            resetLevel();
+        } else if (msgBox.clickedButton() == quitButton) {
+            closeGame();
+        }
+    }
+}
+
+void GameController::startNextLevel(int newLevel){
+    if(newLevel > 5){
+        return;
+    }
+    Map* newMap = new Map(newLevel);
+    view->setScene(newMap);
+    GameController* newGameController = new GameController(newMap, newLevel, view);
+
+    deleteLater();
+}
+
 void GameController::closeGame() {
     QApplication::quit();
 }
@@ -177,8 +245,8 @@ void GameController::placecannon(){
         if(tile->isSelected() && (towerbuilt(tile->x(),tile->y()) == false)){
 
             // remove coins to buy the tower
-            map->Coins -=500;
             coinbalance -= 500;
+            map->setCoins(coinbalance);
             map->setCoinsLabelText(coinbalance);
             UpgradeSound->play();
             CannonTower* newCannon = new CannonTower(map, tile->x(),tile->y());
@@ -229,8 +297,8 @@ void GameController::placeinferno(){
         if(tile->isSelected() && (towerbuilt(tile->x(),tile->y()) == false)){
 
             // remove coins to buy the tower
-            map->Coins -=750;
             coinbalance -= 750;
+            map->setCoins(coinbalance);
             map->setCoinsLabelText(coinbalance);
             UpgradeSound->play();
 
@@ -247,8 +315,8 @@ void GameController::placexbow(){
     for(QGraphicsRectItem* tile: map->tiles){
         if(tile->isSelected() && (towerbuilt(tile->x(),tile->y()) == false)){
             // remove coins to buy the tower
-            map->Coins -=1000;
             coinbalance -= 1000;
+            map->setCoins(coinbalance);
             map->setCoinsLabelText(coinbalance);
             UpgradeSound->play();
             XbowTower* newXbow = new XbowTower(map, tile->x(), tile->y());
@@ -265,8 +333,8 @@ void GameController::placetesla(){
         if(tile->isSelected() && (towerbuilt(tile->x(),tile->y()) == false)){
 
             //remove coins to buy the tower
-            map->Coins -=1500;
             coinbalance -= 1500;
+            map->setCoins(coinbalance);
             map->setCoinsLabelText(coinbalance);
             UpgradeSound->play();
 

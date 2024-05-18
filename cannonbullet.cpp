@@ -12,5 +12,5 @@ QString CannonBullet::getImagePath() const {
 }
 
 void CannonBullet::setBulletSpeed(){
-    Bullet::bulletSpeed = 2;
+    Bullet::bulletSpeed = 5;
 }

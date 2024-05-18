@@ -5,7 +5,7 @@
 help::help(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::help)
-    , map(new Map(5)) // Instantiate Map object
+    , map(new Map(1)) // Instantiate Map object
     , view(NULL)
 {
     ui->setupUi(this);
@@ -41,9 +41,8 @@ void help::on_Nextbutton_clicked()
         ui->Nextbutton->setText("Let's Go");
     }
     else if(ui->Nextbutton->text() == "Let's Go"){
-        gameMusic->play();
-        gameController = new GameController(map);
         hide();
+        gameMusic->play();
 
         view = new QGraphicsView();
         view->setScene(map);
@@ -52,6 +51,7 @@ void help::on_Nextbutton_clicked()
         view->show();
         view->setFixedSize(1400, 700);
         view->viewport()->setAttribute(Qt::WidgetAttribute::WA_AcceptTouchEvents, false);
+        gameController = new GameController(map,1, view);
     }
 }
 

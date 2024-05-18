@@ -18,8 +18,7 @@ class GameController : public QObject
     Q_OBJECT
 
 public:
-    GameController(Map* map);
-
+    GameController(Map* map, int mapLevel, QGraphicsView* view);
     void setTotalWaves(int totalWaves);
 
 signals:
@@ -33,7 +32,6 @@ public slots:
 private:
     Map* map;
     QList<Enemy*> enemies;
-    // QList<CannonTower*> towers;
     QList<Tower*> towers;
     QTimer* waveTimer;
     int currentWaveIndex;
@@ -44,17 +42,23 @@ private:
     int playerHealth; // Declaration of playerHealth variable
     int coinbalance;
     int selectedtower;
+    int mapLevel = 0;
+    int numFinishedEnemies = 0;
 
     QSoundEffect* BalloonSpawn;
     QSoundEffect* BalloonDie;
     QSoundEffect* UpgradeSound;
+
+    QGraphicsView* view;
 
     void spawnEnemy();
     void handleEnemyDestroyed(Enemy* destroyedEnemy);
     void handleEnemyDissapeared(Enemy* enemy);
     void handlePlayerLost();
     void resetLevel(); // Add resetLevel declaration
+    void nextLevel();
     void closeGame(); // Add closeGame declaration
+    void startNextLevel(int newLevel);
 
     void placexbow();
     void placetesla();
