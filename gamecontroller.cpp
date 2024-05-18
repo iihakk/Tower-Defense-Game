@@ -19,7 +19,7 @@ GameController::GameController(Map* map, int mapLevel, QGraphicsView* view)
     waveDuration = 10000 + 1000*mapLevel;
     totalWaves = ((this->mapLevel) == 1)?2:(this->mapLevel);
     playerHealth = 100;
-    coinbalance = 600+400*(this->mapLevel);
+    coinbalance = 850+400*(this->mapLevel);
     waveInterval = 10000 + 1000 * mapLevel;
     numFinishedEnemies = totalWaves*numEnemiesPerWave;
 
