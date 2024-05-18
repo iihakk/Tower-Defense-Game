@@ -11,6 +11,7 @@ QString InfernoBullet::getImagePath() const {
     return ":/OtherImages/png-clipart-fire-ball-fire-removebg-preview.png";
 }
 
+//set bullet speed
 void InfernoBullet::setBulletSpeed(){
     Bullet::bulletSpeed = 5;
 }

@@ -31,6 +31,7 @@ StartMenu::~StartMenu()
 
 }
 
+//initialize the game
 void StartMenu::on_startbutton_clicked()
 {
     hide();

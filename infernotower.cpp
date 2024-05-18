@@ -15,6 +15,7 @@ InfernoTower::InfernoTower(Map* map, int posX, int posY) : InfernoTower(map) {
     this->setY(posY);
 }
 
+//upgrade the inferno
 bool InfernoTower::upgrade(int& playerCurrency) {
     ConfirmUpgrade = upgrademsg();
 
@@ -43,6 +44,7 @@ void InfernoTower::shoot(){
     emit Tower::shoot(this);
 }
 
+//shoot on enemy
 void InfernoTower::shoot(Enemy* enemy){
     if(enemy){
         QPointF position = this->pos();

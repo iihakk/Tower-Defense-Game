@@ -10,12 +10,14 @@ CannonTower::CannonTower(Map* map) : Tower(40, 100, 100, 200, 1, map) {
     setLevelImage();
 }
 
+//constructor
 CannonTower::CannonTower(Map* map, int posX, int posY) : CannonTower(map){
     setLevelImage();
     this->setX(posX);
     this->setY(posY);
 }
 
+//upgrades the cannontower by increasing the attributes if there is enough balance
 bool CannonTower::upgrade(int& playerCurrency) {
     ConfirmUpgrade = upgrademsg();
 
@@ -34,14 +36,17 @@ bool CannonTower::upgrade(int& playerCurrency) {
     return false;
 }
 
+//sets the new image for the new cannon level
 void CannonTower::setLevelImage() {
     setPixmap(QPixmap(levelImages[UpgradeLevel]).scaled(100,100));
 }
 
+//function to make the cannon shoot
 void CannonTower::shoot(){
     emit Tower::shoot(this);
 }
 
+//function to shoot a bullet on the specified enemy
 void CannonTower::shoot(Enemy* enemy){
     if(enemy){
         QPointF position = this->pos();

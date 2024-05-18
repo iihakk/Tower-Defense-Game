@@ -5,6 +5,7 @@
 #include <QApplication> // Add this include
 #include <QGraphicsView>
 
+//constructor
 GameController::GameController(Map* map, int mapLevel, QGraphicsView* view)
     : QObject(),
     currentWaveIndex(0)
@@ -12,6 +13,7 @@ GameController::GameController(Map* map, int mapLevel, QGraphicsView* view)
     this->map = map;
     this->view = view;
 
+    //initialization of the initial variables according based on the map levels
     this->mapLevel = mapLevel;
     numEnemiesPerWave = 10+((this->mapLevel*5)/2);
     waveDuration = 10000 + 1000*mapLevel;
@@ -21,9 +23,11 @@ GameController::GameController(Map* map, int mapLevel, QGraphicsView* view)
     waveInterval = 5000 + 1000 * mapLevel;
     numFinishedEnemies = totalWaves*numEnemiesPerWave;
 
+    //display the changes on the scene (the map)
     map->setCoins(coinbalance);
     map->setHealth(playerHealth);
 
+    //sound effects
     BalloonSpawn = new QSoundEffect(this);
     BalloonSpawn->setSource(QUrl("qrc:/Effects/BalloonSpawn.wav"));
 
@@ -34,9 +38,11 @@ GameController::GameController(Map* map, int mapLevel, QGraphicsView* view)
     UpgradeSound = new QSoundEffect(this);
     UpgradeSound->setSource(QUrl("qrc:/Effects/UpgradeSound.wav"));
 
+    //connect
     connect(waveTimer, &QTimer::timeout, this, &GameController::startWaves);
     waveTimer->start(waveInterval);
 
+    //connect
     connect(this, &GameController::playerLost, this, &GameController::handlePlayerLost);
 
     // catch signals if sent to place towers and call each ones function
@@ -144,6 +150,7 @@ void GameController::handleEnemyDissapeared(Enemy* enemy){
     }
 }
 
+//if the player lost, show a button to try again or quit
 void GameController::handlePlayerLost(){
     waveTimer->stop();
     disconnect(this, &GameController::playerLost, this, &GameController::handlePlayerLost);
@@ -167,6 +174,7 @@ void GameController::handlePlayerLost(){
     }
 }
 
+//resets the current level
 void GameController::resetLevel() {
     for (Tower* tower : towers) {
         delete tower;
@@ -184,6 +192,7 @@ void GameController::resetLevel() {
     deleteLater(); // Delete the current GameController instance
 }
 
+//shows message box to create a new level
 void GameController::nextLevel(){
     int newLevel = mapLevel+1;
     if(newLevel > 5){
@@ -224,6 +233,7 @@ void GameController::nextLevel(){
     }
 }
 
+//starts the next level
 void GameController::startNextLevel(int newLevel){
     if(newLevel > 5){
         return;
@@ -235,10 +245,12 @@ void GameController::startNextLevel(int newLevel){
     deleteLater();
 }
 
+//closes the game
 void GameController::closeGame() {
     QApplication::quit();
 }
 
+//places a cannon on the specified tile
 void GameController::placecannon(){
 
     for(QGraphicsRectItem* tile: map->tiles){
@@ -257,6 +269,7 @@ void GameController::placecannon(){
     }
 }
 
+//upgrades a tower
 void GameController::UpgradeTower()
 {
 
@@ -274,6 +287,7 @@ void GameController::UpgradeTower()
     }
 }
 
+//returns true if a tower has been built on the specified location
 bool GameController::towerbuilt(int x, int y)
 {
 
@@ -290,7 +304,7 @@ bool GameController::towerbuilt(int x, int y)
     return false;
 }
 
-
+//places an inferno tower
 void GameController::placeinferno(){
 
     for(QGraphicsRectItem* tile: map->tiles){
@@ -309,8 +323,8 @@ void GameController::placeinferno(){
     }
 }
 
+//places an xbow tower
 void GameController::placexbow(){
-
 
     for(QGraphicsRectItem* tile: map->tiles){
         if(tile->isSelected() && (towerbuilt(tile->x(),tile->y()) == false)){
@@ -326,9 +340,8 @@ void GameController::placexbow(){
     }
 }
 
+//places a tesla tower
 void GameController::placetesla(){
-
-
     for(QGraphicsRectItem* tile: map->tiles){
         if(tile->isSelected() && (towerbuilt(tile->x(),tile->y()) == false)){
 
@@ -379,6 +392,7 @@ Enemy* GameController::findClosestEnemyWithinRange(Tower* tower){
     return nullptr;
 }
 
+//allows the tower to shoot at the closest enemy
 void GameController::handleTowerShooting(Tower* tower){
     Enemy* closestEnemy = findClosestEnemyWithinRange(tower);
     if(closestEnemy)

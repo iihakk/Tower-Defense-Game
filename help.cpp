@@ -25,6 +25,7 @@ help::~help()
     delete ui;
 }
 
+//return to the start menu
 void help::on_backbutton_clicked()
 {
     hide();
@@ -32,7 +33,8 @@ void help::on_backbutton_clicked()
     startwindow -> show();
 }
 
-
+//if the next button is clicked, show the next text
+//if the let's go button is clicked, start the game
 void help::on_Nextbutton_clicked()
 {
     if(ui->Nextbutton->text() == "Next"){

@@ -73,6 +73,7 @@ void Enemy::move() {
     this->setY(enemyPath[currentIndex++]->y());
 }
 
+//function to make the enemy take damage
 void Enemy::takeDamage(int damage) {
     health -= damage;
     // Ensure health doesn't go below 0

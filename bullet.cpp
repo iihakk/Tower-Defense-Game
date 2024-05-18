@@ -15,6 +15,7 @@ Bullet::Bullet(Map* map, QPointF& pos, double damage, Enemy* targetEnemy) {
     bulletMotionTimer->start(50); // move the bullet 50 times per second
 }
 
+//destructor for the bullet
 Bullet::~Bullet() {
     setEnemy(nullptr);
     bulletMotionTimer->stop();
@@ -23,6 +24,8 @@ Bullet::~Bullet() {
     }
 }
 
+//moves the bullet through a simple alogrithm determining the position of the enemy
+//also handles the collision between the bullet and the enemies
 void Bullet::move() {
     if (enemy == nullptr ||  (!enemy->isALive()) || (enemy->GetMaxHealth()!=100)){
         delete this;
@@ -59,22 +62,27 @@ void Bullet::move() {
     }
 }
 
+//sets the damage to the new damage
 void Bullet::setDamage(int newDamage) {
     damage = newDamage;
 }
 
+//returns the damage
 int Bullet::getDamage() const {
     return damage;
 }
 
+//returns the bullet's enemy
 Enemy* Bullet::getEnemy() const {
     return enemy;
 }
 
+//returns the bullet's map
 Map* Bullet::getMap() const {
     return map;
 }
 
+//sets the bullet's enemy to the specified enemy
 void Bullet::setEnemy(Enemy* enemy) {
     this->enemy = enemy;
 }
