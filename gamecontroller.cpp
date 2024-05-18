@@ -237,9 +237,6 @@ void GameController::nextLevel(){
 
 //starts the next level
 void GameController::startNextLevel(int newLevel){
-    if(newLevel > 5){
-        return;
-    }
     Map* newMap = new Map(newLevel);
     view->setScene(newMap);
     GameController* newGameController = new GameController(newMap, newLevel, view);

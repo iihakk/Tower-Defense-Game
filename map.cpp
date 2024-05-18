@@ -259,7 +259,7 @@ void Map::createPath(int level){
     }
 
     //this level has two paths so it initializes path1 and path2 as opposite yet identical paths
-    else if(level == 5){
+    else if(level == 4){
         path2.pop_back(); // remove the no path2 in existence marker
 
         //The shift points, the enemy will keep moving until it reaches them, then shifts
@@ -315,7 +315,7 @@ void Map::createPath(int level){
         }
     }
 
-    else if (level == 4){
+    else if (level == 5){
         path2.pop_back(); // remove the no path2 in existence marker
 
         //The shift points, the enemy will keep moving until it reaches them, then shifts
