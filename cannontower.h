@@ -24,4 +24,4 @@ private:
 
 };
 
-#endif // CANNONTOWER_H
+#endif

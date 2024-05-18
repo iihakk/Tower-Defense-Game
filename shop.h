@@ -40,4 +40,4 @@ private:
     Map *map;
 };
 
-#endif // SHOP_H
+#endif

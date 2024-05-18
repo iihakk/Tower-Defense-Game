@@ -6,7 +6,7 @@ const std::vector<QString> XbowTower::levelImages = {
     ":/TowerImages/Xbow3.png"
 };
 
-XbowTower::XbowTower(Map* map) : Tower(1, 150, 200, 300, 20, map) {
+XbowTower::XbowTower(Map* map) : Tower(5, 150, 350, 300, 20, map) {
     setLevelImage();
 }
 
@@ -22,7 +22,7 @@ bool XbowTower::upgrade(int& playerCurrency) {
         if (UpgradeLevel < MaxUpgradeLevel) {
             if (playerCurrency >= UpgradeCost){
                 playerCurrency -= UpgradeCost;
-                increaseAttributes(1, 0, 0, 100);
+                increaseAttributes(1, 0, 0, 150);
                 UpgradeLevel++;
                 setLevelImage();
                 return true;

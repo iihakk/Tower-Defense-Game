@@ -46,4 +46,4 @@ private:
     std::vector<QPoint*> enemyPath;
 };
 
-#endif // ENEMY_H
+#endif

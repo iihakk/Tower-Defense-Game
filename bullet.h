@@ -38,4 +38,4 @@ protected:
 
 };
 
-#endif // BULLET_H
+#endif

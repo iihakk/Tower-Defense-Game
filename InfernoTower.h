@@ -25,4 +25,4 @@ private:
 
 };
 
-#endif // INFERNOTOWER_H
+#endif

@@ -67,7 +67,7 @@ void Shop::on_cannonbuy_clicked()
 
 void Shop::on_infernobuy_clicked()
 {
-    if (map->getCoins() < 750){
+    if (map->getCoins() < 1500){
         ui->insufficientbalance->setVisible(true);
     }
     else {
@@ -91,7 +91,7 @@ void Shop::on_xbowbuy_clicked()
 
 void Shop::on_teslabuy_clicked()
 {
-    if (map->getCoins() < 1500){
+    if (map->getCoins() < 750){
         ui->insufficientbalance->setVisible(true);
     }
     else {

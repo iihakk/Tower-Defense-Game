@@ -31,4 +31,4 @@ private:
 
 };
 
-#endif // HELP_H
+#endif

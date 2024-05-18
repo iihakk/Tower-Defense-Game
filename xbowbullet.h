@@ -12,4 +12,4 @@ protected:
     void setBulletSpeed() override;
 };
 
-#endif // XBOWBULLET_H
+#endif

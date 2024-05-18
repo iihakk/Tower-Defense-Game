@@ -6,7 +6,7 @@ const std::vector<QString> CannonTower::levelImages = {
     ":/TowerImages/Cannon3.png"
 };
 
-CannonTower::CannonTower(Map* map) : Tower(40, 100, 100, 200, 1, map) {
+CannonTower::CannonTower(Map* map) : Tower(15, 100, 250, 200, 4, map) {
     setLevelImage();
 }
 
@@ -24,7 +24,7 @@ bool CannonTower::upgrade(int& playerCurrency) {
     if (ConfirmUpgrade == true){
             if (playerCurrency >= UpgradeCost){
                 playerCurrency -= UpgradeCost;
-                increaseAttributes(10, 10, 0, 50);
+                increaseAttributes(10, 10, 0, 200);
                 UpgradeLevel++;
                 setLevelImage();
                 return true;

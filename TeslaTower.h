@@ -23,4 +23,4 @@ private:
     static const std::vector<QString> levelImages;
 };
 
-#endif // TESLATOWER_H
+#endif

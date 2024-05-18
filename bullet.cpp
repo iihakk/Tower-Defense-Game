@@ -12,7 +12,7 @@ Bullet::Bullet(Map* map, QPointF& pos, double damage, Enemy* targetEnemy) {
     // Create a timer for bullet motion, set the bullet to move every .05 seconds
     bulletMotionTimer = new QTimer();
     connect(bulletMotionTimer, SIGNAL(timeout()), this, SLOT(move()));
-    bulletMotionTimer->start(50); // move the bullet 50 times per second
+    bulletMotionTimer->start(20); // move the bullet 20 times per second
 }
 
 //destructor for the bullet

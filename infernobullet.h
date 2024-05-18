@@ -13,4 +13,4 @@ protected:
     void setBulletSpeed() override;
 };
 
-#endif // INFERNOBULLET_H
+#endif

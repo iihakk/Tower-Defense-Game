@@ -12,7 +12,6 @@
 Map::Map(int level) {
     // initialize health, score and level variables with correct values
     this->level = level;
-    Coins = 5000;
     health = 100;
     QGraphicsScene();
     startScene();

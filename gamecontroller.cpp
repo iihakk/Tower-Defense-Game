@@ -15,12 +15,12 @@ GameController::GameController(Map* map, int mapLevel, QGraphicsView* view)
 
     //initialization of the initial variables according based on the map levels
     this->mapLevel = mapLevel;
-    numEnemiesPerWave = 10+((this->mapLevel*5)/2);
+    numEnemiesPerWave = 5+((this->mapLevel*5)/2);
     waveDuration = 10000 + 1000*mapLevel;
     totalWaves = ((this->mapLevel) == 1)?2:(this->mapLevel);
-    playerHealth = 100 + (this->mapLevel)*10;
-    coinbalance = 3000+400*(this->mapLevel);
-    waveInterval = 5000 + 1000 * mapLevel;
+    playerHealth = 100;
+    coinbalance = 600+400*(this->mapLevel);
+    waveInterval = 10000 + 1000 * mapLevel;
     numFinishedEnemies = totalWaves*numEnemiesPerWave;
 
     //display the changes on the scene (the map)
@@ -180,9 +180,9 @@ void GameController::resetLevel() {
         delete tower;
     }
     towers.clear();
-    playerHealth = 100 + (this->mapLevel)*10;
+    playerHealth = 100;
     map->setHealthLabelText(playerHealth);
-    coinbalance = 3000+400*(this->mapLevel);
+    coinbalance = 1000+400*(this->mapLevel);
     map->setCoinsLabelText(coinbalance);
     currentWaveIndex = 0;
 
@@ -311,7 +311,7 @@ void GameController::placeinferno(){
         if(tile->isSelected() && (towerbuilt(tile->x(),tile->y()) == false)){
 
             // remove coins to buy the tower
-            coinbalance -= 750;
+            coinbalance -= 1500;
             map->setCoins(coinbalance);
             map->setCoinsLabelText(coinbalance);
             UpgradeSound->play();
@@ -346,7 +346,7 @@ void GameController::placetesla(){
         if(tile->isSelected() && (towerbuilt(tile->x(),tile->y()) == false)){
 
             //remove coins to buy the tower
-            coinbalance -= 1500;
+            coinbalance -= 750;
             map->setCoins(coinbalance);
             map->setCoinsLabelText(coinbalance);
             UpgradeSound->play();

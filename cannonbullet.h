@@ -13,4 +13,4 @@ protected:
     void setBulletSpeed() override;
 };
 
-#endif // CANNONBULLET_H
+#endif

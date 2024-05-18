@@ -73,5 +73,5 @@ private:
 
 };
 
-#endif // GAMECONTROLLER_H
+#endif
 

@@ -23,4 +23,4 @@ private:
     static const std::vector<QString> levelImages;
 };
 
-#endif // XBOWTOWER_H
+#endif

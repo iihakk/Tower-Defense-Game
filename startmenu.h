@@ -40,4 +40,4 @@ private:
 
 };
 
-#endif // STARTMENU_H
+#endif

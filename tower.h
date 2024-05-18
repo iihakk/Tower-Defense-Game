@@ -59,4 +59,4 @@ protected:
     Enemy* findClosestEnemyWithinRange();
 };
 
-#endif // TOWER_H
+#endif

@@ -5,6 +5,13 @@
 #include <vector>
 #include <QLabel>
 #include <QPushButton>
+#include <QPixmap>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
+#include <QWidget>
+#include <QRectF>
+#include <QGraphicsView>
+#include <QGraphicsProxyWidget>
 
 class Map : public QGraphicsScene
 {
@@ -62,4 +69,4 @@ signals:
     void upgradetower();
 };
 
-#endif // MAP_H
+#endif
