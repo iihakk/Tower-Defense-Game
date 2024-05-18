@@ -6,7 +6,7 @@ const std::vector<QString> CannonTower::levelImages = {
     ":/TowerImages/Cannon3.png"
 };
 
-CannonTower::CannonTower(Map* map) : Tower(15, 100, 250, 200, 4, map) {
+CannonTower::CannonTower(Map* map) : Tower(20, 100, 250, 200, 4, map) {
     setLevelImage();
 }
 
