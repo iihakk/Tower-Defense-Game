@@ -83,17 +83,16 @@ void GameController::spawnWave()
 //starts the waves
 void GameController::startWaves()
 {
-    if (playerHealth > 0)
-
-    if (this->mapLevel<4)            {
-        spawnWave();
-        waveTimer->start((waveInterval + waveDuration)-(2000*this->mapLevel));
+    if (playerHealth > 0){
+        if (this->mapLevel<4){
+            spawnWave();
+            waveTimer->start((waveInterval + waveDuration)-(2000*this->mapLevel));
         }
-    else if  (this->mapLevel>3){
-        spawnWave();
-        waveTimer->start((waveInterval + waveDuration)-(2750*this->mapLevel));
+        else if  (this->mapLevel>3){
+            spawnWave();
+            waveTimer->start((waveInterval + waveDuration)-(2750*this->mapLevel));
+        }
     }
-
 }
 
 //spawns an enemy into existence
