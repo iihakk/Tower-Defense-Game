@@ -44,6 +44,7 @@ private:
     int selectedtower;
     int mapLevel = 0;
     int numFinishedEnemies = 0;
+    int totalEnemies;
 
     QSoundEffect* BalloonSpawn;
     QSoundEffect* BalloonDie;

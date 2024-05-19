@@ -6,7 +6,7 @@ const std::vector<QString> InfernoTower::levelImages = {
     ":/TowerImages/Inferno3.png"
 };
 
-InfernoTower::InfernoTower(Map* map) : Tower(35, 200, 500, 250, 4, map) {
+InfernoTower::InfernoTower(Map* map) : Tower(25, 200, 500, 250, 4, map) {
     setLevelImage();
 }
 
@@ -22,7 +22,7 @@ bool InfernoTower::upgrade(int& playerCurrency) {
     if (ConfirmUpgrade == true){
             if (playerCurrency >= UpgradeCost){
                 playerCurrency -= UpgradeCost;
-                increaseAttributes(10, 10, 1, 350);
+                increaseAttributes(7, 10, 1, 350);
                 UpgradeLevel++;
                 setLevelImage();
                 return true;

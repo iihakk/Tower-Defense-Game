@@ -17,7 +17,7 @@ Enemy::Enemy(Map* map) : QObject(), QGraphicsPixmapItem() {
 
     motionTimer = new QTimer();
     connect(motionTimer, SIGNAL(timeout()), this, SLOT(move()));
-    motionTimer->start(50);
+    motionTimer->start(35);
 
     this->map = map;
 

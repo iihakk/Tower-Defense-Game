@@ -15,13 +15,15 @@ GameController::GameController(Map* map, int mapLevel, QGraphicsView* view)
 
     //initialization of the initial variables according based on the map levels
     this->mapLevel = mapLevel;
-    numEnemiesPerWave = 5+((this->mapLevel*5)/2);
+    numEnemiesPerWave = 3+((this->mapLevel*6))/3;
     waveDuration = 10000 + 1000*mapLevel;
     totalWaves = ((this->mapLevel) == 1)?2:(this->mapLevel);
     playerHealth = 100;
     coinbalance = 850+400*(this->mapLevel);
-    waveInterval = 10000 + 1000 * mapLevel;
-    numFinishedEnemies = totalWaves*numEnemiesPerWave;
+
+    waveInterval = 8000 + 1000 * mapLevel;
+    totalEnemies = totalWaves * numEnemiesPerWave + 4 * ((totalWaves - 1) * totalWaves) / 2;
+    numFinishedEnemies = totalEnemies;
 
     //display the changes on the scene (the map)
     map->setCoins(coinbalance);
@@ -70,7 +72,7 @@ void GameController::spawnWave()
     }
 
     if (playerHealth > 0) {
-        for (int i = 0; i < numEnemiesPerWave; i++) {
+        for (int i = 0; i < numEnemiesPerWave+(4*currentWaveIndex); i++) {
             QTimer::singleShot(i * (waveDuration / numEnemiesPerWave), this, &GameController::spawnEnemy);
         }
     }
@@ -81,10 +83,17 @@ void GameController::spawnWave()
 //starts the waves
 void GameController::startWaves()
 {
-    if (playerHealth > 0) {
+    if (playerHealth > 0)
+
+    if (this->mapLevel<4)            {
         spawnWave();
-        waveTimer->start(waveInterval + waveDuration);
+        waveTimer->start((waveInterval + waveDuration)-(2000*this->mapLevel));
+        }
+    else if  (this->mapLevel>3){
+        spawnWave();
+        waveTimer->start((waveInterval + waveDuration)-(2750*this->mapLevel));
     }
+
 }
 
 //spawns an enemy into existence

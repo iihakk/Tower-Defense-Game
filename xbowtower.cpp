@@ -6,7 +6,7 @@ const std::vector<QString> XbowTower::levelImages = {
     ":/TowerImages/Xbow3.png"
 };
 
-XbowTower::XbowTower(Map* map) : Tower(5, 150, 350, 300, 20, map) {
+XbowTower::XbowTower(Map* map) : Tower(4, 150, 350, 300, 20, map) {
     setLevelImage();
 }
 
