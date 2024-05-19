@@ -32,7 +32,7 @@ Shop::Shop(QWidget *parent, Map* originalmap)
 
     ui->insufficientbalance->setVisible(false);
 
-    QFont font("Arial", 10);
+    QFont font("Arial", 15);
 
     ui->coinbalance->setFont(font);
     ui->coinbalance->setText("Coin Balance: " + QString::number(map->getcoinbalance()));

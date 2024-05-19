@@ -76,9 +76,9 @@ void Map::startScene(){
     levellabel->setFont(font);
 
     // place labels in correct position
-    levellabel->setGeometry(QRectF(700,50,20,10));
-    healthlabel->setGeometry(QRectF(5,0,20,10));
-    coinslabel->setGeometry(QRectF(5,50,150,10));
+    levellabel->setGeometry(QRectF(700,50,70,10));
+    healthlabel->setGeometry(QRectF(5,0,100,10));
+    coinslabel->setGeometry(QRectF(5,50,190,10));
 
     // initialize health, score and level labels with correct values
     setHealthLabelText(health);

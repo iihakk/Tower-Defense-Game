@@ -39,8 +39,8 @@ void help::on_backbutton_clicked()
 void help::on_Nextbutton_clicked()
 {
     if(ui->Nextbutton->text() == "Next"){
-        ui->informationLineEdit->setText("You have a limited health, and a limited budget! Select a tile, buy an item through the shop, and "
-                                         "it will be placed on the selected tile. Upgrade towers to increase their attributes. Enjoy~~");
+        ui->informationLineEdit->setText("You have limited health, and a limited budget! Select a tile, buy an item through the shop, and "
+                                         "it will be automatically placed on the selected tile. Upgrade towers by selecting the tower you wish to upgrade and clicking upgrade to increase their attributes. Enjoy~~");
         ui->Nextbutton->setText("Let's Go");
     }
     else if(ui->Nextbutton->text() == "Let's Go"){
