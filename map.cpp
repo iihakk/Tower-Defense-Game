@@ -1,11 +1,7 @@
 #include "map.h"
-#include <QtWidgets/QGraphicsScene>
 #include <QMouseEvent>
 #include <QGraphicsRectItem>
-#include <QGraphicsProxyWidget>
 #include <QFont>
-#include <QObject>
-#include <QDebug>
 #include <shop.h>
 
 //Initialize the map

@@ -128,7 +128,6 @@ void GameController::handleEnemyDestroyed(Enemy* destroyedEnemy) {
                 if (b){
                 if(b->getEnemy() == destroyedEnemy){
                     if(towers[i]->scene() == b->scene()){
-                       // towers[i]->bullets.removeOne(b);
                         delete b;
                     }}
                 }
@@ -271,7 +270,6 @@ void GameController::placecannon(){
             CannonTower* newCannon = new CannonTower(map, tile->x(),tile->y());
             towers.append(newCannon);
             connect(newCannon, SIGNAL(shoot(Tower*)), this, SLOT(handleTowerShooting(Tower*)));
-            //tile->setFlag(QGraphicsItem::ItemIsSelectable, false);
         }
     }
 }

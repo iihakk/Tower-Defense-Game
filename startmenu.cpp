@@ -1,7 +1,6 @@
 #include "startmenu.h"
 #include "ui_startmenu.h"
 #include "help.h"
-#include <gamecontroller.h>
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QGraphicsItem>
@@ -27,7 +26,6 @@ StartMenu::~StartMenu()
     delete ui;
     delete map; // Delete the map object
     delete view; // Delete the view object
-
 }
 
 //initialize the game
@@ -45,8 +43,6 @@ void StartMenu::on_startbutton_clicked()
     view->viewport()->setAttribute(Qt::WidgetAttribute::WA_AcceptTouchEvents, false);
 
     gameController = new GameController(map,1, view);
-
-
 }
 
 

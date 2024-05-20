@@ -47,7 +47,6 @@ protected:
     static const int MaxUpgradeLevel = 2;
     bool ConfirmUpgrade;
 
-
     Map* map;
     std::vector<QString> levelImages;
     void increaseAttributes(int dmgIncrease, int rangeIncrease, int rateIncrease, int costIncrease);

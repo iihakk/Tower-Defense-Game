@@ -7,7 +7,6 @@
 #include "QSoundEffect"
 #include "QMediaPlayer"
 
-
 namespace Ui {
 class StartMenu;
 }
@@ -22,18 +21,13 @@ public:
 
 private slots:
     void on_startbutton_clicked();
-
     void on_helpbutton_clicked();
 
 private:
     Ui::StartMenu *ui;
-
     QSoundEffect* gameMusic;
-
     Map* map;
-
     GameController* gameController = nullptr;
-
     QGraphicsView* view ;
 
 };

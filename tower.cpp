@@ -1,6 +1,5 @@
 #include "tower.h"
 #include <QTimer>
-#include <QMessageBox>
 #include <QString>
 
 // base tower instantiation with its properties and sets the QGraphicsItem as parent

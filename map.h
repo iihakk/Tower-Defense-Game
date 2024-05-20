@@ -1,5 +1,6 @@
 #ifndef MAP_H
 #define MAP_H
+
 #include <QGraphicsScene>
 #include <QObject>
 #include <vector>

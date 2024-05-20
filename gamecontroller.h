@@ -4,14 +4,14 @@
 #include <QObject>
 #include <QTimer>
 #include <QList>
+#include <QMediaPlayer>
+#include <QSoundEffect>
 #include "map.h"
 #include "enemy.h"
 #include "cannontower.h"
 #include "infernotower.h"
 #include "xbowtower.h"
 #include "teslatower.h"
-#include <QMediaPlayer>
-#include <QSoundEffect>
 
 class GameController : public QObject
 {
@@ -75,4 +75,3 @@ private:
 };
 
 #endif
-

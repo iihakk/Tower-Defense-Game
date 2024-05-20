@@ -2,11 +2,10 @@
 #define ENEMY_H
 
 #include <QGraphicsPixmapItem>
-#include <QGraphicsItem>
 #include <QObject>
 #include <QMediaPlayer>
-#include "map.h"
 #include <QProgressBar>
+#include "map.h"
 
 class Enemy : public QObject, public QGraphicsPixmapItem
 {

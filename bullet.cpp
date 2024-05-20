@@ -1,5 +1,4 @@
 #include "bullet.h"
-#include <QTimer>
 
 Bullet::Bullet(Map* map, QPointF& pos, double damage, Enemy* targetEnemy) {
     this->map = map; // set the map of the bullet (its scene)

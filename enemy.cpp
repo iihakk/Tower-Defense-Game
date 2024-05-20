@@ -4,7 +4,6 @@
 #include "QGraphicsScene"
 #include "QGraphicsProxyWidget"
 #include "Bullet.h"
-#include "QGraphicsProxyWidget"
 
 // Constructor of the enemy
 Enemy::Enemy(Map* map) : QObject(), QGraphicsPixmapItem() {
