@@ -8,7 +8,6 @@
 #include <QApplication>
 #include <gamecontroller.h>
 
-
 StartMenu::StartMenu(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::StartMenu)
@@ -57,6 +56,3 @@ void StartMenu::on_helpbutton_clicked()
     help *helpwindow = new help(this);
     helpwindow -> show();    
 }
-
-
-

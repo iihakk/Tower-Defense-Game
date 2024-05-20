@@ -14,7 +14,6 @@ public:
     virtual ~Bullet();
 
     void setDamage(int damage);
-    int getDamage() const;
     void setEnemy(Enemy* enemy);
     Enemy* getEnemy() const;
 

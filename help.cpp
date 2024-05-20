@@ -57,4 +57,3 @@ void help::on_Nextbutton_clicked()
         gameController = new GameController(map,1, view);
     }
 }
-

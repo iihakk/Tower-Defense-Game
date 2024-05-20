@@ -55,4 +55,3 @@ void InfernoTower::shoot(Enemy* enemy){
         connect(bullet, SIGNAL(deleteBulletSignal(Bullet*)), this, SLOT(handleDeleteBulletSignal(Bullet*)));
     }
 }
-

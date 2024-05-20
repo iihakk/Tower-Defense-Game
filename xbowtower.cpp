@@ -35,9 +35,6 @@ bool XbowTower::upgrade(int& playerCurrency) {
     return false;
 }
 
-
-
-
 void XbowTower::setLevelImage() {
     setPixmap(QPixmap(levelImages[UpgradeLevel]).scaled(100, 100));
 }
@@ -56,4 +53,3 @@ void XbowTower::shoot(Enemy* enemy){
         connect(bullet, SIGNAL(deleteBulletSignal(Bullet*)), this, SLOT(handleDeleteBulletSignal(Bullet*)));
     }
 }
-

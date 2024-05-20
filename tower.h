@@ -6,8 +6,7 @@
 #include <vector>
 #include "map.h"
 #include "enemy.h"
-#include "cannonbullet.h"
-#include "infernobullet.h"
+#include "bullet.h"
 #include <QMessageBox>
 
 class Tower : public QObject, public QGraphicsPixmapItem {

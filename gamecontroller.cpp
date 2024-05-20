@@ -1,8 +1,7 @@
 #include "gamecontroller.h"
 #include <QMouseEvent>
-#include <iostream>
 #include <QMessageBox>
-#include <QApplication> // Add this include
+#include <QApplication>
 #include <QGraphicsView>
 
 //constructor
@@ -406,5 +405,3 @@ void GameController::handleTowerShooting(Tower* tower){
     if(closestEnemy)
         tower->shoot(closestEnemy);
 }
-
-

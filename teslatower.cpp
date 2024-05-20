@@ -34,7 +34,6 @@ bool TeslaTower::upgrade(int& playerCurrency) {
     return false;
 }
 
-
 void TeslaTower::setLevelImage() {
     setPixmap(QPixmap(levelImages[UpgradeLevel]).scaled(100, 100));
 }

@@ -67,18 +67,11 @@ void Bullet::setDamage(int newDamage) {
     damage = newDamage;
 }
 
-//returns the damage
-int Bullet::getDamage() const {
-    return damage;
-}
-
-//returns the bullet's enemy
-Enemy* Bullet::getEnemy() const {
-    return enemy;
-}
-
 //sets the bullet's enemy to the specified enemy
 void Bullet::setEnemy(Enemy* enemy) {
     this->enemy = enemy;
 }
-
+//returns the bullet's enemy
+Enemy* Bullet::getEnemy() const {
+    return enemy;
+}

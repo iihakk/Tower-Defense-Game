@@ -5,7 +5,6 @@
 #include "QGraphicsProxyWidget"
 #include "Bullet.h"
 #include "QGraphicsProxyWidget"
-using namespace std;
 
 // Constructor of the enemy
 Enemy::Enemy(Map* map) : QObject(), QGraphicsPixmapItem() {
@@ -103,4 +102,5 @@ void Enemy::setHealthBarColor(const QString& color) {
 }
 
 int Enemy::GetMaxHealth(){
-    return maxHealth;}
+    return maxHealth;
+}
