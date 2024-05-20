@@ -55,8 +55,6 @@ protected:
     std::vector<QString> levelImages;
     void increaseAttributes(int dmgIncrease, int rangeIncrease, int rateIncrease, int costIncrease);
 
-    double calculateDistance(const QPointF& from, const QPointF& to);
-    Enemy* findClosestEnemyWithinRange();
 };
 
 #endif
