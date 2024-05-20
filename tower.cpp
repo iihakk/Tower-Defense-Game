@@ -16,7 +16,7 @@ Tower::Tower(int dmg, int hlth, int cst, int rng, int fireR, Map* map)
 }
 
 Tower::~Tower(){
-    this->stopShootingTimer();
+    towerShootingTimer->stop();
     this->scene()->removeItem(this);
 }
 
@@ -26,10 +26,6 @@ void Tower::increaseAttributes(int dmgIncrease, int rangeIncrease, int rateIncre
     Range += rangeIncrease;
     FiringRate += rateIncrease;
     UpgradeCost += costIncrease;
-}
-
-void Tower::stopShootingTimer(){
-    towerShootingTimer->stop();
 }
 
 int Tower::getlevel()

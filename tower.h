@@ -21,8 +21,6 @@ public:
     QList<Bullet*> bullets;
     QTimer* towerShootingTimer;
 
-    void stopShootingTimer();
-
     int getlevel();
     int getRange();
 

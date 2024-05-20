@@ -53,6 +53,7 @@ Enemy::Enemy(Map* map) : QObject(), QGraphicsPixmapItem() {
 
 // Destructor of the enemy
 Enemy::~Enemy() {
+    motionTimer->stop();
     // Remove the enemy from the map
     if(this->scene() == map){
         map->removeItem(this);
