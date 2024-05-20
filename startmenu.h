@@ -20,8 +20,6 @@ public:
     explicit StartMenu(QWidget *parent = nullptr);
     ~StartMenu();
 
-    static void click();
-
 private slots:
     void on_startbutton_clicked();
 
