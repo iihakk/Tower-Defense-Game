@@ -27,7 +27,7 @@ Bullet::~Bullet() {
 //moves the bullet through a simple alogrithm determining the position of the enemy
 //also handles the collision between the bullet and the enemies
 void Bullet::move() {
-    if (enemy == nullptr ||  (!enemy->isALive())){
+    if (enemy == nullptr ||  (!enemy->isALive()) || (enemy->GetMaxHealth()!=100)){
         delete this;
         return;
     }

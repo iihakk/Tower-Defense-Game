@@ -18,6 +18,7 @@ public:
     {
         return isAlive;
     }
+    int GetMaxHealth();
     void setAlive(bool isAlive){
         this->isAlive = isAlive;
     }
