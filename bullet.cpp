@@ -27,7 +27,7 @@ Bullet::~Bullet() {
 //moves the bullet through a simple alogrithm determining the position of the enemy
 //also handles the collision between the bullet and the enemies
 void Bullet::move() {
-    if (enemy == nullptr ||  (!enemy->isALive()) || (enemy->GetMaxHealth()!=100)){
+    if (enemy == nullptr ||  (!enemy->isALive())){
         delete this;
         return;
     }
@@ -75,11 +75,6 @@ int Bullet::getDamage() const {
 //returns the bullet's enemy
 Enemy* Bullet::getEnemy() const {
     return enemy;
-}
-
-//returns the bullet's map
-Map* Bullet::getMap() const {
-    return map;
 }
 
 //sets the bullet's enemy to the specified enemy

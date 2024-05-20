@@ -101,11 +101,3 @@ void Enemy::setHealthBarColor(const QString& color) {
     // Set the stylesheet to change the color of the health bar
     healthBar.setStyleSheet("QProgressBar::chunk { background-color: " + color + "; }");
 }
-
-// Returns enemy health
-int Enemy::getHealth() const {
-    return health;
-}
-
-int Enemy::GetMaxHealth(){
-    return maxHealth;}

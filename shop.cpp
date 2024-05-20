@@ -1,3 +1,4 @@
+
 #include "shop.h"
 #include "ui_shop.h"
 #include "QPixmap"

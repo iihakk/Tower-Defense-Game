@@ -17,7 +17,6 @@ public:
     int getDamage() const;
     void setEnemy(Enemy* enemy);
     Enemy* getEnemy() const;
-    Map* getMap() const;
 
     // Pure virtual function to get the image path
     virtual QString getImagePath() const = 0;

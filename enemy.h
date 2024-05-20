@@ -14,12 +14,10 @@ class Enemy : public QObject, public QGraphicsPixmapItem
 public:
     Enemy(Map *);
     ~Enemy();
-    int getHealth() const;
     bool isALive() const
     {
         return isAlive;
     }
-    int GetMaxHealth();
     void setAlive(bool isAlive){
         this->isAlive = isAlive;
     }
